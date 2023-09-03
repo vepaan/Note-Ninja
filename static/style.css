@@ -20,6 +20,7 @@ h1 {
 }
 h1 span {
   color: #BD53ED;
+  position: relative;
 }
 
 h1 span::before {
