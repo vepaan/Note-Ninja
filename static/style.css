@@ -1,19 +1,30 @@
+* {
+  font-family: poppins;
+}
 body {
+  background-image: url(maindesign1.png);
+  overflow: hidden;
+}
+.main {
+  position: fixed;
+  top: 0;
   display: flex;
-  height: 100vh;
   align-items: center;
   justify-content: center;
-  background-image: url(maindesign1.png);
+  height: 100vh;
 }
 h1 {
   color: #fff;
-  font-family: poppins;
   font-size: 10vw;
   font-weight: 700;
 }
 h1 span {
   color: #BD53ED;
-  position: relative;
+}
+.main > h1{
+  text-shadow: #FC0 0.1vw 1vw;
+  margin: 0;
+  
 }
 h1 span::before {
   content: "";
@@ -31,4 +42,77 @@ h1 span.stop-blinking::before {
 }
 @keyframes blink {
   50% { opacity: 0 }
+}
+
+/* Navbar styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 10px;
+  width: 60%;
+  overflow: hidden;
+  margin: auto;
+}
+
+.container {
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+
+a {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+a:hover:not(.logo) {
+  color: #ff5722;
+}
+
+a:not(.logo):after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: orangered;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+a:not(.logo):hover:after, a.active:after{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.active{
+  color: #ff5722;
+}
+
+a.active:hover::after{
+  animation: under 1s;
+  transform-origin: bottom left;
+}
+
+@keyframes  under {
+    0% {
+      transform: scalex(1);
+    }
+    10% {
+      transform: scalex(0);
+    }
+    100% {
+      transform: scalex(1);
+    }
 }
