@@ -6,9 +6,8 @@ body {
   overflow: hidden;
 }
 .main {
-  position: fixed;
-  top: 0;
   display: flex;
+  transform: translate(0px,-84px);
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -17,15 +16,12 @@ h1 {
   color: #fff;
   font-size: 10vw;
   font-weight: 700;
+  text-shadow: #FC0 0.1vw 1vw;
 }
 h1 span {
   color: #BD53ED;
 }
-.main > h1{
-  text-shadow: #FC0 0.1vw 1vw;
-  margin: 0;
-  
-}
+
 h1 span::before {
   content: "";
   height: 0.7em;
