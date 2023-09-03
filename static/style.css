@@ -52,6 +52,7 @@ h1 span.stop-blinking::before {
   width: 60%;
   overflow: hidden;
   margin: auto;
+  z-index: 1;
 }
 
 .container {
