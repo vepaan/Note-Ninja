@@ -1,20 +1,29 @@
+* {
+  font-family: poppins;
+}
 body {
+  background-image: url(maindesign1.png);
+  overflow: hidden;
+}
+.main {
   display: flex;
-  height: 100vh;
+  transform: translate(0px,-84px);
   align-items: center;
   justify-content: center;
-  background-image: url(maindesign1.png);
+  height: 100vh;
 }
 h1 {
   color: #fff;
-  font-family: poppins;
   font-size: 10vw;
   font-weight: 700;
+  text-shadow: 0.3vw 0.3vw #7b7b7b;
 }
 h1 span {
   color: #BD53ED;
+  text-shadow: rgba(251, 0, 255, 0.8) 0.3vw 0.3vw;
   position: relative;
 }
+
 h1 span::before {
   content: "";
   height: 0.7em;
@@ -31,4 +40,115 @@ h1 span.stop-blinking::before {
 }
 @keyframes blink {
   50% { opacity: 0 }
+}
+
+/* Navbar styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(51,51,51,.65);
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 10px;
+  width: 60%;
+  overflow: hidden;
+  margin: auto;
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+
+li>a, ul>a {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+li>a:hover {
+  color: #ff5722;
+}
+
+li>a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #ff5722;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+li>a:hover:after, a.active:after{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+a.active:after{
+  background-color: white;
+}
+
+a.active:hover::after{
+  animation: under 1s;
+  transform-origin: bottom left;
+  background-color: #ff5722;
+}
+
+@keyframes  under {
+    0% {
+      transform: scalex(1);
+    }
+    10% {
+      transform: scalex(0);
+    }
+    100% {
+      transform: scalex(1);
+    }
+}
+
+@media only screen and  (max-width: 768px) {
+  .navbar {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .navbar {
+    display: block;
+  }
+}
+
+#icons {
+  background-color: #534d56;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 40px;
+  width: 40px;
+  border-radius: 30px;
+  overflow: hidden;
+  margin: 30px 50px 15px 15px;
+}
+
+#icons > i {
+  position: relative;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 30px;
+}
+
+#bounce {
+  display: none;
 }
