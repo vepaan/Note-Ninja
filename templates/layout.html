@@ -9,15 +9,23 @@
      <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
      <script src="{{ url_for('static', filename='script.js')}}" defer></script>
      <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='notesninjalogo.png')}}" />
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chela+One&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
             <ul class="container">
                 <li><a href={{ url_for("main") }} class = {{ "active" if active=="home" else "" }}>Home</a></li>
-                <li><a href={{ url_for("about") }} class = {{ "active" if active=="about" else "" }}>Account</a></li>
-                <a href={{ url_for("main") }} ><img class="logo" src="{{ url_for('static', filename='notesninjalogo.png')}}" alt="Logo" id="logo"></a>
                 <li><a href="#" class = {{ "active" if active=="practice" else "" }}>Practice</a></li>
+                <div class="empty"></div>
+                <ul class="container logo-div">
+                    <li class="title">Notes</li>
+                    <a class="logo-container" href={{ url_for("main") }} ><img class="logo" src="{{ url_for('static', filename='notesninjalogo.png')}}" alt="Logo" id="logo"></a>
+                    <li class="title">Ninja</li>
+                </ul>
                 <li><a href="#" class = {{ "active" if active=="docs" else "" }}>Documents</a></li>
+                <li><a href={{ url_for("about") }} class = {{ "active" if active=="about" else "" }}>About</a></li>
             </ul>
         </div>
     </nav>
