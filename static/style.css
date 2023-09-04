@@ -85,7 +85,7 @@ li>a:after {
   height: 2px;
   bottom: -5px;
   left: 0;
-  background-color: rgb(204, 255, 0);
+  background-color: #ff5722;
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
@@ -101,7 +101,7 @@ a.active:after{
 a.active:hover::after{
   animation: under 1s;
   transform-origin: bottom left;
-  background-color: rgb(204, 255, 0);
+  background-color: #ff5722;
 }
 
 @keyframes  under {
