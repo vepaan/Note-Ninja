@@ -152,3 +152,7 @@ a.active:hover::after{
 #bounce {
   display: none;
 }
+
+.logo {
+  height: 50px;
+}

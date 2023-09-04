@@ -8,14 +8,14 @@
      <script src="https://kit.fontawesome.com/eb018bf6f2.js" crossorigin="anonymous"></script>
      <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
      <script src="{{ url_for('static', filename='script.js')}}" defer></script>
-     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='logo.ico')}}" />
+     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='notesninjalogo.png')}}" />
 </head>
 <body>
     <nav class="navbar">
             <ul class="container">
                 <li><a href={{ url_for("main") }} class = {{ "active" if active=="home" else "" }}>Home</a></li>
                 <li><a href={{ url_for("about") }} class = {{ "active" if active=="about" else "" }}>About</a></li>
-                <a href={{ url_for("main") }} class="logo"><img src="notesninjalogo.png" alt="Logo" id="logo"></a>
+                <a href={{ url_for("main") }} ><img class="logo" src="{{ url_for('static', filename='notesninjalogo.png')}}" alt="Logo" id="logo"></a>
                 <li><a href="#" class = {{ "active" if active=="practice" else "" }}>Practice</a></li>
                 <li><a href="#" class = {{ "active" if active=="docs" else "" }}>Documents</a></li>
             </ul>
