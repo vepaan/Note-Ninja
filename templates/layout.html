@@ -2,13 +2,29 @@
 <html lang="en">
 <head>
      <meta charset="UTF-8">
-     <meta name="'viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"></style>
      <title>NotesNinja</title>
+     <script src="https://kit.fontawesome.com/eb018bf6f2.js" crossorigin="anonymous"></script>
      <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
      <script src="{{ url_for('static', filename='script.js')}}" defer></script>
+     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='logo.ico')}}" />
 </head>
 <body>
+    <nav class="navbar">
+            <ul class="container">
+                <li><a href={{ url_for("main") }} class = {{ "active" if active=="home" else "" }}>Home</a></li>
+                <li><a href={{ url_for("about") }} class = {{ "active" if active=="about" else "" }}>About</a></li>
+                <a href={{ url_for("main") }} class="logo"><img src="" alt="Logo" id="logo"></a>
+                <li><a href="#" class = {{ "active" if active=="practice" else "" }}>Practice</a></li>
+                <li><a href="#" class = {{ "active" if active=="docs" else "" }}>Documents</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="icons">
+        <i id="bounce" class="fa-solid fa-user fa-bounce"></i>
+        <i class="fa-solid fa-user"></i>
+    </div>
     {% block body %}{% endblock %}
 </body>
 </html>
