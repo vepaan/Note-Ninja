@@ -153,19 +153,15 @@ a.active:hover::after{
 }
 
 .logo {
-  height: 56px;
+  height: 70px;
   position:relative;
-
-}
-
-.title {
-  font-family: 'Chela One', cursive;
-  font-size: max(4.3vw,40px);
 }
 
 .logo-div {
   position: absolute;
-  left: 32%;
+  left: 46%;
+  right:50%;
+  top:9%;
 }
 
 .empty {

@@ -20,9 +20,7 @@
                 <li><a href="#" class = {{ "active" if active=="practice" else "" }}>Practice</a></li>
                 <div class="empty"></div>
                 <ul class="container logo-div">
-                    <li class="title">Notes</li>
-                    <a class="logo-container" href={{ url_for("main") }} ><img class="logo" src="{{ url_for('static', filename='notesninjalogo.png')}}" alt="Logo" id="logo"></a>
-                    <li class="title">Ninja</li>
+                <a class="logo-container" href={{ url_for("main") }} ><img class="logo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo" id="logo"></a>
                 </ul>
                 <li><a href="#" class = {{ "active" if active=="docs" else "" }}>Documents</a></li>
                 <li><a href={{ url_for("about") }} class = {{ "active" if active=="about" else "" }}>About</a></li>
