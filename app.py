@@ -11,3 +11,7 @@ def main():
 @app.route('/about')
 def about():
     return render_template("index.html", active="about")
+
+@app.route('/notes')
+def notes():
+    return render_template("notes.html", active="notes")

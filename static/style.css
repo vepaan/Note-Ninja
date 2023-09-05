@@ -154,8 +154,8 @@ a.active:hover::after{
 }
 
 #logo {
-  height: 70px;
-  position:relative;
+  height: max(70px,6vw);
+  position: relative;
 }
 
 .logo-div {
@@ -167,4 +167,5 @@ a.active:hover::after{
 
 .empty {
   width: 200px;
+  height: 25px;
 }

@@ -29,4 +29,6 @@ const typeEffect = () => {
     }
 }
 
-typeEffect();
+if (window.location.pathname == "/"){
+    typeEffect();
+}
