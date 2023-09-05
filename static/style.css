@@ -175,11 +175,16 @@ a.active:hover::after{
 .wrapper{
   position: absolute;
   bottom:7%;
+  width:30%;
+  right:0;
+  left:0;
+  margin:auto;
   z-index: 1;
-  display: inline-flex;
+  display: flex;
+  justify-content: space-evenly;
 }
 .wrapper .icon{
-  margin: 0 20px;
+  margin: 0 15px;
   text-align: center;
   cursor: pointer;
   display: flex;
@@ -220,4 +225,10 @@ a.active:hover::after{
 }
 .wrapper .gmail:hover span{
   background: #BB001B;
+}
+.wrapper .github:hover span{
+  background-color: #8332a9;
+}
+.wrapper .linkedin:hover span{
+  background-color: #0072b1;
 }
