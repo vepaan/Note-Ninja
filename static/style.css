@@ -7,7 +7,7 @@ body {
 }
 .main {
   display: flex;
-  transform: translate(0px,-84px);
+  transform: translate(0px,-76px);
   align-items: center;
   justify-content: center;
   height: 100vh;
