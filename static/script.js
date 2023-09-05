@@ -32,3 +32,24 @@ const typeEffect = () => {
 if (window.location.pathname == "/"){
     typeEffect();
 }
+
+// Popup
+const overlay = document.getElementById("overlay");
+const popup = document.getElementById("popup");
+const closeBtn = document.getElementById("close-btn");
+
+// Check if a session cookie is set to determine if the popup should be displayed
+const hasSeenPopup = sessionStorage.getItem("hasSeenPopup");
+
+if (!hasSeenPopup) {
+    overlay.style.display = "block";
+    popup.style.display = "block";
+}
+
+closeBtn.addEventListener("click", function () {
+    overlay.style.display = "none";
+    popup.style.display = "none";
+
+    // Set a session cookie to remember that the popup has been seen
+    sessionStorage.setItem("hasSeenPopup", "true");
+});
