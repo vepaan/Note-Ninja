@@ -118,6 +118,9 @@ a.active:hover::after{
   .navbar {
     display: none;
   }
+  .main {
+    transform: none;
+  }
 }
 
 
@@ -154,8 +157,8 @@ a.active:hover::after{
 }
 
 #logo {
-  height: max(70px,6vw);
-  position: relative;
+  height: 70px;
+  position:relative;
 }
 
 .logo-div {
@@ -167,5 +170,4 @@ a.active:hover::after{
 
 .empty {
   width: 200px;
-  height: 25px;
 }
