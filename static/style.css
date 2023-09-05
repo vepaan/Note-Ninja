@@ -114,13 +114,14 @@ a.active:hover::after{
     }
 }
 
-@media only screen and  (max-width: 768px) {
+@media screen and  (max-width: 768px) {
   .navbar {
     display: none;
   }
 }
 
-@media only screen and (min-width: 769px) {
+
+@media screen and (min-width: 769px) {
   .navbar {
     display: block;
     min-width: 590px;
@@ -152,7 +153,7 @@ a.active:hover::after{
   display: none;
 }
 
-.logo {
+#logo {
   height: 70px;
   position:relative;
 }
