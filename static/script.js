@@ -29,4 +29,56 @@ const typeEffect = () => {
     }
 }
 
-typeEffect();
+if (window.location.pathname == "/"){
+    typeEffect();
+}
+
+// Popup
+const overlay = document.getElementById("overlay");
+const popup = document.getElementById("popup");
+const closeBtn = document.getElementById("close-btn");
+const body = document.querySelector("body");
+
+// Check if a session cookie is set to determine if the popup should be displayed
+const hasSeenPopup = sessionStorage.getItem("hasSeenPopup");
+
+openPop = () => {
+        overlay.style.display = "block";
+        popup.style.display = "block";
+        body.classList.add("blur");
+}
+
+if (!hasSeenPopup) {
+    openPop();
+}
+
+closeBtn.addEventListener("click", function () {
+    overlay.style.display = "none";
+    popup.style.display = "none";
+    body.classList.remove("blur");
+
+    // Set a session cookie to remember that the popup has been seen
+    sessionStorage.setItem("hasSeenPopup", true);
+});
+
+// JavaScript to handle the hamburger menu toggle
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const navbar = document.querySelector('.navbar');
+
+hamburgerBtn.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+});
+
+// Close the navbar when a link is clicked
+document.querySelectorAll('.container a').forEach(link => {
+    link.addEventListener('click', () => {
+        navbar.classList.remove('active');
+    });
+});
+
+// Close the navbar when clicking outside of it
+document.addEventListener('click', (event) => {
+    if (!navbar.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+        navbar.classList.remove('active');
+    }
+});
