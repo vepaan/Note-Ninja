@@ -307,7 +307,7 @@ body {
 /* Hamburger */
 .hamburger {
   position: absolute;
-  top: 27px;
+  top: 5%;
   left: 10px;
   background-color: transparent;
   border: none;
