@@ -53,3 +53,25 @@ closeBtn.addEventListener("click", function () {
     // Set a session cookie to remember that the popup has been seen
     sessionStorage.setItem("hasSeenPopup", "true");
 });
+
+// JavaScript to handle the hamburger menu toggle
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const navbar = document.querySelector('.navbar');
+
+hamburgerBtn.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+});
+
+// Close the navbar when a link is clicked
+document.querySelectorAll('.container a').forEach(link => {
+    link.addEventListener('click', () => {
+        navbar.classList.remove('active');
+    });
+});
+
+// Close the navbar when clicking outside of it
+document.addEventListener('click', (event) => {
+    if (!navbar.contains(event.target) && !hamburgerBtn.contains(event.target)) {
+        navbar.classList.remove('active');
+    }
+});

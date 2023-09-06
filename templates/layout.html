@@ -15,6 +15,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Chela+One&display=swap" rel="stylesheet">
 </head>
 <body>
+    
+    <button class="hamburger" id="hamburger-btn">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </button>
     <nav class="navbar">
             <ul class="container">
                 <li><a href="{{ url_for('main') }}" class = '{{ "active" if active=="home" else "" }}'>Home</a></li>
