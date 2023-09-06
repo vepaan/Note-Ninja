@@ -30,7 +30,7 @@
                     <a href='{{ url_for("main") }}' ><img id="logo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
                 </div>
                 <li><a href='#' class = '{{ "active" if active=="practice" else "" }}'>Practice</a></li>
-                <li><a href='{{ url_for("about") }}' class = '{{ "active" if active=="about" else "" }}'>About</a></li>
+                <li><a onclick="openPop();return false;" class = '{{ "active" if active=="about" else "" }}'>About</a></li>
             </ul>
         </div>
     </nav>
@@ -39,7 +39,7 @@
     <div class="popup" id="popup">
         <span class="close-btn" id="close-btn">&times;</span>
         <img id="logo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo" class="center-top">
-        <h2>Welcome to the <em>Enigmatic Universe of Science</em></h2>
+        <h2 style="text-align: center;">Welcome to the <em>Enigmatic Universe of Science</em></h2>
         <p>Ladies and gentlemen, knowledge seekers, and future scientists of the cosmos, gather 'round as we introduce you to a symphony of intellect, a kaleidoscope of wisdom, and an ocean of enlightenment. Behold, the most awe-inspiring, mind-boggling, and utterly captivating educational portal dedicated to unraveling the mysteries of the universe - the <strong>Ultimate Science Nexus</strong>!</p>
 
         <p>Embark on a journey with us, where the boundaries of human understanding are shattered, and the realms of physics and chemistry are explored with unparalleled fervor. We are not just an educational website; we are your portal to a cosmic voyage, your celestial classroom, and your gateway to the secrets that govern the very fabric of our existence.</p>
