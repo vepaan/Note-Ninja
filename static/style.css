@@ -134,13 +134,11 @@ a.active:hover::after{
 #icons {
   background-color: #534d56;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 4.5%;
+  right: 3%;
   height: 40px;
   width: 40px;
   border-radius: 30px;
-  overflow: hidden;
-  margin: 30px 50px 15px 15px;
 }
 
 #icons > i {
@@ -174,8 +172,8 @@ a.active:hover::after{
 
 .wrapper{
   position: absolute;
-  bottom:7%;
-  width:30%;
+  bottom:5%;
+  width:max(30%,300px);
   right:0;
   left:0;
   margin:auto;
@@ -184,7 +182,7 @@ a.active:hover::after{
   justify-content: space-evenly;
 }
 .wrapper .icon{
-  margin: 0 15px;
+  margin: min(6px,15px);
   text-align: center;
   cursor: pointer;
   display: flex;
@@ -197,8 +195,8 @@ a.active:hover::after{
 }
 .wrapper .icon span{
   display: block;
-  height: 60px;
-  width: 60px;
+  height: min(60px,55px);
+  width: min(60px,55px);
   background: #fff;
   border-radius: 50%;
   position: relative;
@@ -207,8 +205,8 @@ a.active:hover::after{
   transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 .wrapper .icon span i{
-  line-height: 60px;
-  font-size: 25px;
+  line-height: min(60px,55px);
+  font-size: min(25px,22px);
 }
 
 .wrapper .icon:hover span{
@@ -280,3 +278,28 @@ body {
   color: #333;
 }
 
+/*logo for less viewport width*/
+#companylogo{
+  display:none;
+  position:absolute;
+  height:70px;
+  top:3%;
+  width:max();
+  right:0;
+  left:0;
+  margin:auto;
+  justify-content: space-evenly;
+}
+
+@media (max-width: 768px){
+  #companylogo{
+    display: block;
+  }
+}
+
+.center-top{
+  position: absolute;
+  top: 0;
+  left: 49%;
+  transform: translateX(-50%);
+}
