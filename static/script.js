@@ -63,7 +63,7 @@ closeBtn.addEventListener("click", function () {
 
 // JavaScript to handle the hamburger menu toggle
 const hamburgerBtn = document.getElementById('hamburger-btn');
-const navbar = document.querySelector('.navbar');
+const navbar = document.querySelector('.navbar-main');
 
 hamburgerBtn.addEventListener('click', () => {
     navbar.classList.toggle('active');
