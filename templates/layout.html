@@ -8,10 +8,13 @@
      <script src="https://kit.fontawesome.com/eb018bf6f2.js" crossorigin="anonymous"></script>
      <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
      <script src="{{ url_for('static', filename='script.js')}}" defer></script>
+
      <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='notesninjalogo.png')}}" />
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chela+One&display=swap" rel="stylesheet">
+     <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+      </script>
+      <script defer src="/_vercel/insights/script.js"></script>
+
 </head>
 <body>
     
@@ -29,53 +32,52 @@
                     <a href='{{ url_for("main") }}' ><img id="logo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
                 </div>
                 <li><a href='#' class = '{{ "active" if active=="practice" else "" }}'>Practice</a></li>
-                <li><a href='{{ url_for("about") }}' class = '{{ "active" if active=="about" else "" }}'>About</a></li>
+                <li><a href="#" onclick="openPop();return false;" class = '{{ "active" if active=="about" else "" }}'>About</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="overlay" id="overlay">
-        <div class="popup" id="popup">
-            <span class="close-btn" id="close-btn">&times;</span>
-            <img id="logo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo" class="center-top">
-            <h2>Welcome to the <em>Enigmatic Universe of Science</em></h2>
-            <p>Ladies and gentlemen, knowledge seekers, and future scientists of the cosmos, gather 'round as we introduce you to a symphony of intellect, a kaleidoscope of wisdom, and an ocean of enlightenment. Behold, the most awe-inspiring, mind-boggling, and utterly captivating educational portal dedicated to unraveling the mysteries of the universe - the <strong>Ultimate Science Nexus</strong>!</p>
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <span class="close-btn" id="close-btn">&times;</span>
+        <img id="logo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo" class="center-top">
+        <h2 style="text-align: center;">Welcome to the <em>Enigmatic Universe of Science</em></h2>
+        <p>Ladies and gentlemen, knowledge seekers, and future scientists of the cosmos, gather 'round as we introduce you to a symphony of intellect, a kaleidoscope of wisdom, and an ocean of enlightenment. Behold, the most awe-inspiring, mind-boggling, and utterly captivating educational portal dedicated to unraveling the mysteries of the universe - the <strong>Ultimate Science Nexus</strong>!</p>
 
-            <p>Embark on a journey with us, where the boundaries of human understanding are shattered, and the realms of physics and chemistry are explored with unparalleled fervor. We are not just an educational website; we are your portal to a cosmic voyage, your celestial classroom, and your gateway to the secrets that govern the very fabric of our existence.</p>
+        <p>Embark on a journey with us, where the boundaries of human understanding are shattered, and the realms of physics and chemistry are explored with unparalleled fervor. We are not just an educational website; we are your portal to a cosmic voyage, your celestial classroom, and your gateway to the secrets that govern the very fabric of our existence.</p>
 
-            <p><strong>Our Cosmic Crusaders</strong></p>
+        <p><strong>Our Cosmic Crusaders</strong></p>
 
-            <p>At the helm of this intellectual odyssey are a legion of intrepid scholars, esteemed scientists, and educators who are nothing short of <em>academic superheroes</em>. With a passion for unraveling the universe's deepest enigmas, they wield knowledge like a cosmic sword, leading you through the most challenging concepts with grace and finesse.</p>
+        <p>At the helm of this intellectual odyssey are a legion of intrepid scholars, esteemed scientists, and educators who are nothing short of <em>academic superheroes</em>. With a passion for unraveling the universe's deepest enigmas, they wield knowledge like a cosmic sword, leading you through the most challenging concepts with grace and finesse.</p>
 
-            <p>Our <em>Physics Pharaohs</em> are the architects of understanding the fundamental forces that govern the cosmos. From quantum mechanics to general relativity, they will guide you through the warp and weft of space-time, leaving you awe-inspired and humbled by the majesty of the universe.</p>
+        <p>Our <em>Physics Pharaohs</em> are the architects of understanding the fundamental forces that govern the cosmos. From quantum mechanics to general relativity, they will guide you through the warp and weft of space-time, leaving you awe-inspired and humbled by the majesty of the universe.</p>
 
-            <p>On the other hand, our <em>Chemical Chameleons</em> will take you on a mesmerizing expedition into the atomic and molecular realms, where reactions dance like cosmic ballets, and chemical compounds orchestrate the symphonies of existence. You will emerge with a profound appreciation for the alchemical beauty of the world around you.</p>
+        <p>On the other hand, our <em>Chemical Chameleons</em> will take you on a mesmerizing expedition into the atomic and molecular realms, where reactions dance like cosmic ballets, and chemical compounds orchestrate the symphonies of existence. You will emerge with a profound appreciation for the alchemical beauty of the world around you.</p>
 
-            <p><strong>Unveiling the Cosmic Classroom</strong></p>
+        <p><strong>Unveiling the Cosmic Classroom</strong></p>
 
-            <p>Our website isn't just a repository of knowledge; it's a <em>sanctuary of learning</em>. Dive into our meticulously crafted courses that are designed to transform you into a <em>scientific virtuoso</em>. Each lesson is a pearl of wisdom, each module a revelation, and each assessment a challenge that will test the limits of your intellect.</p>
+        <p>Our website isn't just a repository of knowledge; it's a <em>sanctuary of learning</em>. Dive into our meticulously crafted courses that are designed to transform you into a <em>scientific virtuoso</em>. Each lesson is a pearl of wisdom, each module a revelation, and each assessment a challenge that will test the limits of your intellect.</p>
 
-            <p>Witness the magic of our interactive simulations, where you can conduct your own <em>virtual experiments</em> in the safety of your digital laboratory. Blend chemicals, tweak variables, and witness the universe bend to your will, all from the comfort of your computer screen.</p>
+        <p>Witness the magic of our interactive simulations, where you can conduct your own <em>virtual experiments</em> in the safety of your digital laboratory. Blend chemicals, tweak variables, and witness the universe bend to your will, all from the comfort of your computer screen.</p>
 
-            <p><strong>Revolutionizing Education</strong></p>
+        <p><strong>Revolutionizing Education</strong></p>
 
-            <p>We're not just changing the game; we're rewriting the rules. Our mission is to revolutionize education by making it <em>accessible to all</em>. Whether you're a budding astrophysicist, a chemistry enthusiast, or simply curious about the world around you, our resources are here to nurture your curiosity and propel you to intellectual heights you never imagined.</p>
+        <p>We're not just changing the game; we're rewriting the rules. Our mission is to revolutionize education by making it <em>accessible to all</em>. Whether you're a budding astrophysicist, a chemistry enthusiast, or simply curious about the world around you, our resources are here to nurture your curiosity and propel you to intellectual heights you never imagined.</p>
 
-            <p><strong>A Universe of Resources</strong></p>
+        <p><strong>A Universe of Resources</strong></p>
 
-            <p>In the <em>Library of Cosmos</em>, you'll find a treasure trove of articles, ebooks, and research papers that delve into the heart of scientific exploration. Our <em>Cosmic Blogosphere</em> is an intellectual haven where our experts unravel the mysteries of the universe, one blog post at a time.</p>
+        <p>In the <em>Library of Cosmos</em>, you'll find a treasure trove of articles, ebooks, and research papers that delve into the heart of scientific exploration. Our <em>Cosmic Blogosphere</em> is an intellectual haven where our experts unravel the mysteries of the universe, one blog post at a time.</p>
 
-            <p><strong>Community of Cosmic Explorers</strong></p>
+        <p><strong>Community of Cosmic Explorers</strong></p>
 
-            <p>Join our <em>Cosmic Community</em> - a vibrant ecosystem of learners, educators, and science aficionados from across the globe. Engage in riveting discussions, share your thoughts, and collaborate on projects that have the power to change the world.</p>
+        <p>Join our <em>Cosmic Community</em> - a vibrant ecosystem of learners, educators, and science aficionados from across the globe. Engage in riveting discussions, share your thoughts, and collaborate on projects that have the power to change the world.</p>
 
-            <p><strong>Embark on the Journey of a Lifetime</strong></p>
+        <p><strong>Embark on the Journey of a Lifetime</strong></p>
 
-            <p>Are you ready to embark on a journey that will transform you into a cosmic voyager? Are you prepared to unravel the secrets of the universe and embrace the wonders of physics and chemistry like never before? Then, dear traveler of the cosmos, welcome home. Welcome to the <strong>Ultimate Science Nexus</strong> - where the universe is your playground, and knowledge knows no bounds.</p>
+        <p>Are you ready to embark on a journey that will transform you into a cosmic voyager? Are you prepared to unravel the secrets of the universe and embrace the wonders of physics and chemistry like never before? Then, dear traveler of the cosmos, welcome home. Welcome to the <strong>Ultimate Science Nexus</strong> - where the universe is your playground, and knowledge knows no bounds.</p>
 
-            <p>Join us, and together, we'll explore the realms of physics and chemistry, unlocking the mysteries of the universe, one atom at a time. Your journey awaits, and the cosmos beckons.</p>
+        <p>Join us, and together, we'll explore the realms of physics and chemistry, unlocking the mysteries of the universe, one atom at a time. Your journey awaits, and the cosmos beckons.</p>
 
-        </div>
     </div>
 
 

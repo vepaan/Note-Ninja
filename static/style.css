@@ -1,6 +1,3 @@
-* {
-  font-family: poppins;
-}
 body {
   background-image: url(maindesign1.png);
   overflow: hidden;
@@ -258,10 +255,15 @@ body {
   background-color: #949271;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
   max-width: 80%;
   max-height: 80%;
   overflow-y: auto;
+  display: none;
+  z-index: 4;
+}
+
+.blur > *:not(.popup) {
+  filter: blur(3px);
 }
 
 .close-btn {
@@ -272,6 +274,7 @@ body {
   font-size: 30px;
   font-weight: bold;
   color: #555;
+  z-index: 5;
 }
 
 .close-btn:hover {
@@ -364,4 +367,12 @@ body {
   .hamburger {
     display: block; /* Show the hamburger button */
   }
+}
+
+p {
+  text-align: justify;
+}
+
+strong {
+  text-align: center;
 }
