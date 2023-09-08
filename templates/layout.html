@@ -7,7 +7,6 @@
      <title>NotesNinja</title>
      <script src="https://kit.fontawesome.com/eb018bf6f2.js" crossorigin="anonymous"></script>
      <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-     <link rel="stylesheet" type="text/scss" href="{{ url_for('static', filename='style.scss')}}">
      <script src="{{ url_for('static', filename='script.js')}}" defer></script>
 
      <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='notesninjalogo.png')}}" />
@@ -15,7 +14,7 @@
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
       </script>
       <script defer src="/_vercel/insights/script.js"></script>
-
+      {% block head %}{% endblock %}
 </head>
 <body>
     
@@ -24,12 +23,12 @@
         <div class="bar"></div>
         <div class="bar"></div>
     </button>
-    <nav class="navbar">
-            <ul class="container">
+    <nav class="navbar-main">
+            <ul class="container-main">
                 <li><a href="{{ url_for('main') }}" class = '{{ "active" if active=="home" else "" }}'>Home</a></li>
                 <li><a href="{{ url_for('notes') }}" class = '{{ "active" if active=="notes" else "" }}'>Notes</a></li>
                 <div class="empty"></div>
-                <div class="container logo-div">
+                <div class="container-main logo-div">
                     <a href='{{ url_for("main") }}' ><img id="logo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
                 </div>
                 <li><a href='#' class = '{{ "active" if active=="practice" else "" }}'>Practice</a></li>
@@ -87,27 +86,27 @@
         <i class="fa-solid fa-user"></i>
     </div>
     <div class="wrapper">
-        <a href="instagram.com" target="_blank" style="color: black;">
+        <a href="https://www.instagram.com/" target="_blank" style="color: black;">
             <div class="icon instagram">
                 <span><i class="fab fa-instagram"></i></span>
             </div>
         </a>
-        <a href="instagram.com" target="_blank" style="color: black;">
+        <a href="https://www.facebook.com/" target="_blank" style="color: black;">
             <div class="icon facebook">
                 <span><i class="fab fa-facebook-f"></i></span>
             </div>
         </a>
-        <a href="instagram.com" target="_blank" style="color: black;">
+        <a href="https://www.gmail.com/" target="_blank" style="color: black;">
             <div class="icon gmail">
                 <span><i class="fa fa-envelope"></i></span>
             </div>
         </a>
-        <a href="instagram.com" target="_blank" style="color: black;">
+        <a href="https://www.github.com/" target="_blank" style="color: black;">
             <div class="icon github">
                 <span><i class="fa fa-github"></i></span>
             </div>
         </a>
-        <a href="instagram.com" target="_blank" style="color: black;">
+        <a href="https://www.linkedin.com/" target="_blank" style="color: black;">
             <div class="icon linkedin">
                 <span><i class="fa fa-linkedin"></i></span>
             </div>
