@@ -12,6 +12,6 @@ def main():
 def notes():
     return render_template("notes.html", active="notes")
 
-@app.route('/404')
-def error_404():
-    return render_template('404.html')
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html")
