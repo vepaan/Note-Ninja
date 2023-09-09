@@ -12,6 +12,10 @@ def main():
 def notes():
     return render_template("notes.html", active="notes")
 
+@app.route('/login')
+def login():
+    return render_template("login.html")
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html")

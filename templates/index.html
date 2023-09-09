@@ -1,5 +1,32 @@
 {% extends "layout.html" %}
 
+{% block head %}
+  <style>
+    h1 {
+        color: #fff;
+        font-size: 10vw;
+        font-weight: 700;
+        text-shadow: 0.3vw 0.3vw #7b7b7b;
+    }
+    h1 span {
+        color: #BD53ED;
+        text-shadow: rgba(251, 0, 255, 0.8) 0.3vw 0.3vw;
+        position: relative;
+    }
+    
+    h1 span::before {
+        content: "";
+        height: 0.7em;
+        width: 2px;
+        position: absolute;
+        top: 50%;
+        right: -8px;
+        background: white;
+        transform: translateY(-45%);
+        animation: blink 0.7s infinite;
+    }
+  </style>
+{% endblock %}
 {% block body %}
     <div class="main">
         <h1>We are <span></span></h1>
