@@ -26,9 +26,8 @@
 }
 
 #forgot {
-    min-width: 100px;
-    margin-left: auto;
     text-decoration: none;
+    margin-left: auto;
 }
 
 a:hover {
@@ -36,9 +35,14 @@ a:hover {
 }
 
 .form-inline label {
-    padding-left: 10px;
+    padding-left: max(5px,0.5vw);
     margin: 0;
     cursor: pointer;
+}
+
+.form-inline {
+    display: flex;
+    justify-content: flex-end;  
 }
 
 form {
@@ -55,7 +59,13 @@ form {
 .panel {
     min-height: 380px;
     box-shadow: 10px 10px 25px rgba(0, 0, 0, .7);
-    border-radius: 12px
+    border-radius: 12px;
+    width: 80%;
+    max-width: 450px;
+    min-width: 320px;
+    height: auto;
+    max-height: 450px;
+    min-height: 320px;
 }
 
 .input-field {
