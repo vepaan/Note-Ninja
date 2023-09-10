@@ -13,7 +13,7 @@ body{
     color: #FFFFFF; /* Change this to your desired text color */
 }
 .custom-accordion .accordion-item:last-child {
-    margin-bottom: 5%;
+    margin-bottom: 80vh;
     background-color: rgba(51,51,51,.8); 
     color: #FFFFFF;
 }
@@ -35,15 +35,40 @@ body{
     margin-left: 5px;
     color: #FF0000; /* Change this to adjust the color of the icon */
 }
-.custom-pdf-icon i {
-    margin-right: 5px; /* Adjust spacing between icon and text */
-}
 .custom-pdf-icon span {
     font-size: 16px; /* Adjust font size as needed */
     color: white; /* Change this to your desired text color */
 }
 .custom-pdf-icon span:hover {
-    color: #FFA500; /* Change this to your desired hover color (orange in this case) */
+    color: #ff5722;  /* Change this to your desired hover color (orange in this case) */
     transition: color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     cursor: pointer; /* Add pointer cursor on hover */
 }
+
+.custom-pdf-icon a {
+    text-decoration: none; /* Remove default underline */
+    display: inline-block; /* Make the anchor element a block-level element */
+    padding: 0px; /* Adjust padding as needed */
+    color: #ff0000; /* Button text color */
+    transition: background-color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Transition effect */
+}
+.custom-pdf-icon a i {
+    margin-right: 5px; /* Adjust spacing between icon and text */
+}
+.custom-pdf-icon a:hover .pdf-text{ /*this line of code makes it so that when we hover on the pdf icon the text is also hovered upon*/
+    color: #ff5722;  
+    transition: color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    cursor: pointer;   
+}
+
+.more-notes {
+    position: relative;
+    padding:5px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: max(2.2vw,20px);
+}
+
+
