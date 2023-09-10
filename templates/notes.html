@@ -21,7 +21,10 @@
           <div class="list-unstyled">
             {% for (index,file),link in  files_phy%}
             <div class="custom-pdf-icon">
-              <a href ="{{ link }}"><i class="fa fa-file-pdf-o"></i> <span>Chapter {{ index }}: {{file}}</span></a>
+              <a href ="{{ link }}" target="_blank">
+                <i class="fa fa-file-pdf-o"></i>
+                <span class="pdf-text">Chapter {{ index }}: {{file}}</span>
+              </a>
             </div>
             {% endfor%}
             </div>
@@ -39,13 +42,15 @@
           <div class="list-unstyled">
             {% for (index,file),link in  files_chem%}
             <div class="custom-pdf-icon">
-              <a href ="{{ link }}"><i class="fa fa-file-pdf-o"></i> <span>Chapter {{ index }}: {{file}}</span></a>
+              <a href ="{{ link }}" target="_blank">
+                <i class="fa fa-file-pdf-o"></i>
+                <span class="pdf-text">Chapter {{ index }}: {{file}}</span></a>
             </div>
             {% endfor%}
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="more-notes">More notes coming soon</div>
 </div>
 {% endblock %}
