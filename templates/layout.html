@@ -113,8 +113,8 @@
             </div>
         </a>
     </div>
-    <a href='{{ url_for("main") }}' ><img id="companylogo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
     {% endif %}
     {% block body %}{% endblock %}
+    <a href='{{ url_for("main") }}' ><img id="companylogo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
 </body>
 </html>
