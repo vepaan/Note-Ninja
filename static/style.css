@@ -151,7 +151,7 @@ a.active:hover::after{
 }
 
 .wrapper{
-  position: absolute;
+  position: fixed;
   bottom:5%;
   width:max(30%,300px);
   right:0;
