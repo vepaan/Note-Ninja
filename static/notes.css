@@ -13,7 +13,7 @@ body{
     color: #FFFFFF; /* Change this to your desired text color */
 }
 .custom-accordion .accordion-item:last-child {
-    margin-bottom: 15%;
+    margin-bottom: 5%;
     background-color: rgba(51,51,51,.8); 
     color: #FFFFFF;
 }
