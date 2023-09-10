@@ -85,6 +85,7 @@
             <i class="fa-solid fa-user"></i>
         </div>
     </a>
+    {% if active=="home"%}
     <div class="wrapper">
         <a href="https://www.instagram.com/" target="_blank" style="color: black;">
             <div class="icon instagram">
@@ -113,6 +114,7 @@
         </a>
     </div>
     <a href='{{ url_for("main") }}' ><img id="companylogo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
+    {% endif %}
     {% block body %}{% endblock %}
 </body>
 </html>
