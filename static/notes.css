@@ -3,6 +3,7 @@ body {
     background-image: none;
     overflow-y: scroll;
     height:auto;
+    line-height: 1.2!important;
   }
 
 .notes-div {
