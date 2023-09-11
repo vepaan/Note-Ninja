@@ -1,0 +1,22 @@
+.bg {
+    top:0;
+    left: 0;
+    background: url(maindesign1.png);
+
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: -1;
+  }
+
+  .content-main{
+    position: absolute;
+    margin-top: 5rem;
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 80%;
+  }
+  body {
+    overflow: scroll!important;
+    background-image: none;
+  }

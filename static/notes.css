@@ -1,6 +1,95 @@
+body {
+    overflow: hidden;
+    background-image: none;
+    overflow-y: scroll;
+    height:auto;
+    line-height: 1.2!important;
+  }
+
 .notes-div {
     margin-top: 17vh;
     margin-left: 7vh;
     margin-right: 7vh;
-    color: rgba(51,51,51,.65);
+}
+
+.custom-accordion .accordion-item { /*overall color of the accordion item*/
+    background-color: rgba(51,51,51,.8); /* Change this to your desired color */
+    color: #FFFFFF; /* Change this to your desired text color */
+}
+.custom-accordion .accordion-item:last-child {
+    margin-bottom: 80vh;
+    background-color: rgba(51,51,51,.8); 
+    color: #FFFFFF;
+}
+.custom-accordion .accordion-button{/*normal color of accordion button*/
+    background-color: rgba(51,51,51,.8); 
+    color: #FFFFFF; 
+}
+.custom-accordion .accordion-button:not(.collapsed){ /*when the accordion button is pressed set the custom color*/
+    background-color: rgba(51,51,51,.9); 
+    color: #FFFFFF; 
+}
+.custom-accordion .accordion-button:after { /*changing the arrow color to white*/
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.custom-pdf-icon {
+    font-size: 30px !important; /* Change this to adjust the size of the icon */
+    padding: 3px;
+    margin-left: 5px;
+    color: #FF0000; /* Change this to adjust the color of the icon */
+}
+.custom-pdf-icon span {
+    font-size: 16px; /* Adjust font size as needed */
+    color: white; /* Change this to your desired text color */
+}
+.custom-pdf-icon span:hover {
+    color: #ff5722;  /* Change this to your desired hover color (orange in this case) */
+    transition: color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    cursor: pointer; /* Add pointer cursor on hover */
+}
+
+.custom-pdf-icon a {
+    text-decoration: none; /* Remove default underline */
+    display: inline-block; /* Make the anchor element a block-level element */
+    padding: 0px; /* Adjust padding as needed */
+    color: #ff0000; /* Button text color */
+    transition: background-color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Transition effect */
+}
+.custom-pdf-icon a i {
+    margin-right: 5px; /* Adjust spacing between icon and text */
+}
+.custom-pdf-icon a:hover .pdf-text{ /*this line of code makes it so that when we hover on the pdf icon the text is also hovered upon*/
+    color: #ff5722;  
+    transition: color 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    cursor: pointer;   
+}
+
+.more-notes {
+    position: relative;
+    padding:5px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: max(2.2vw,20px);
+}
+
+.bg {
+  top:0;
+  left: 0;
+  background: url(maindesign1.png);
+
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: -1;
+}
+
+.content-main{
+  position: absolute;
+  margin-top: 5rem;
+  left: 50%; 
+  transform: translateX(-50%);
+  width: 80%;
 }

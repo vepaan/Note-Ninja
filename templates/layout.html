@@ -17,7 +17,6 @@
       {% block head %}{% endblock %}
 </head>
 <body>
-    
     <button class="hamburger" id="hamburger-btn">
         <div class="bar"></div>
         <div class="bar"></div>
@@ -31,7 +30,7 @@
                 <div class="container-main logo-div">
                     <a href='{{ url_for("main") }}' ><img id="logo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
                 </div>
-                <li><a href='#' class = '{{ "active" if active=="practice" else "" }}'>Practice</a></li>
+                <li><a href="{{ url_for('practice') }}" class = '{{ "active" if active=="practice" else "" }}'>Practice</a></li>
                 <li><a href="#" onclick="openPop();return false;" class = '{{ "active" if active=="about" else "" }}'>About</a></li>
             </ul>
         </div>
@@ -80,11 +79,13 @@
 
     </div>
 
-
-    <div id="icons">
-        <i id="bounce" class="fa-solid fa-user fa-bounce"></i>
-        <i class="fa-solid fa-user"></i>
-    </div>
+    <a href="{{ url_for('login') }}">
+        <div id="icons">
+            <i id="bounce" class="fa-solid fa-user fa-bounce"></i>
+            <i class="fa-solid fa-user"></i>
+        </div>
+    </a>
+    {% if active=="home"%}
     <div class="wrapper">
         <a href="https://www.instagram.com/" target="_blank" style="color: black;">
             <div class="icon instagram">
@@ -112,7 +113,8 @@
             </div>
         </a>
     </div>
-    <a href='{{ url_for("main") }}' ><img id="companylogo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
+    {% endif %}
     {% block body %}{% endblock %}
+    <a href='{{ url_for("main") }}' ><img id="companylogo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
 </body>
 </html>
