@@ -30,7 +30,11 @@ def notes():
 
 @app.route('/login')
 def login():
-    return render_template("login.html")
+    return render_template("login.html",active=None)
+
+@app.route('/practice')
+def practice():
+    return render_template("practice.html",active="practice")
 
 @app.errorhandler(404)
 def not_found(e):
