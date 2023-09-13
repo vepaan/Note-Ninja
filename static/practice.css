@@ -1,3 +1,11 @@
+body {
+  overflow: hidden;
+  background-image: none;
+  overflow-y: scroll;
+  height:auto;
+  line-height: 1.2!important;
+}
+
 .bg {
     top:0;
     left: 0;
@@ -9,14 +17,32 @@
     z-index: -1;
   }
 
-  .content-main{
-    position: absolute;
-    margin-top: 5rem;
-    left: 50%; 
-    transform: translateX(-50%);
-    width: 80%;
-  }
-  body {
-    overflow: scroll!important;
-    background-image: none;
-  }
+.content-main{
+  position: absolute;
+  margin-top: 5rem;
+  left: 50%; 
+  transform: translateX(-50%);
+  width: 80%;
+}
+
+.info-bar {
+  position: fixed;
+  top: 10vh;
+  right: 8vw;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.badge {
+  font-size: 20px!important;
+  width: max(20vw,250px);
+}
+/*
+select {
+  background-color: rgb(5, 255, 138)!important;
+}
+select~label::after {
+  background-color: rgb(5, 255, 138)!important;
+}
+*/
