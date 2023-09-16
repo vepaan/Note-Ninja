@@ -3,8 +3,6 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask_oauthlib.client import OAuth
 from dotenv import load_dotenv
 from termcolor import cprint
-from pprint import pprint
-import requests
 import secrets
 import os
 
