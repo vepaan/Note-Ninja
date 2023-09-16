@@ -14,6 +14,9 @@
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
       </script>
       <script defer src="/_vercel/insights/script.js"></script>
+      {% if user_info %}
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css')}}"></style>
+      {% endif %}
       {% block head %}{% endblock %}
 </head>
 <body>
@@ -39,9 +42,16 @@
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <span class="close-btn" id="close-btn">&times;</span>
+        {% if not user_info %}
+        {% set name = "Ladies and gentlemen"%}
+        {% set title_name = ""%}
+        {% else %}
+        {% set name = user_info["name"] %}
+        {% set title_name = name%}
+        {% endif %}
         <img id="logo" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo" class="center-top">
-        <h2 style="text-align: center;">Welcome to <strong>NotesNinja</strong></h2>
-        <p>Ladies and gentlemen, knowledge seekers, and future scientists of the cosmos, gather 'round as we introduce you to a symphony of intellect, a kaleidoscope of wisdom, and an ocean of enlightenment.<strong> NotesNinja </strong>is a startup catering to A-level students, providing high quality, comphrensive notes and dynamic practice sessions.</p>
+        <h2 style="text-align: center;">Welcome to <strong>NotesNinja</strong><br> {{ title_name }}!</h2>
+        <p>{{ name }}, knowledge seekers, and future scientists of the cosmos, gather 'round as we introduce you to a symphony of intellect, a kaleidoscope of wisdom, and an ocean of enlightenment.<strong> NotesNinja </strong>is a startup catering to A-level students, providing high quality, comphrensive notes and dynamic practice sessions.</p>
         <p>Now stop reading and go study. You got this!</p>
     </div>
 
@@ -49,6 +59,7 @@
         <div id="icons">
             <i id="bounce" class="fa-solid fa-user fa-bounce"></i>
             <i class="fa-solid fa-user"></i>
+            <img src='{{ user_info["picture"] }}' class="dp"></img>
         </div>
     </a>
     {% if active=="home"%}

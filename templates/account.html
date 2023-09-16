@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<style>
+    .data {
+        display: flex;
+        justify-content: center;
+        color: aliceblue;
+    }
+    .details {
+        display: flex;
+        flex-direction: column;
+    }
+    .col {
+        flex-direction: column;
+        gap: 5px;
+        margin-left: 50px;
+    }
+</style>
+{% endblock %}
+{% block body %}
+    <div class="data">
+        <h1>Accounts Page</h1>
+        <form action="/logout">
+            <input style="margin-top: 35px;margin-left: 5px;" type="submit" value="Login" />
+        </form>
+    </div>
+    <div class="data col">
+        {% for k,v in user_info.items() %}
+        <h3>{{k}}:   {{v}}</h3>
+        {% endfor %}
+    </div>
+{% endblock %}

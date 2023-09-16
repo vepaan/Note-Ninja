@@ -1,0 +1,10 @@
+#icons>*:not(.dp) {
+    display: none;
+}
+#icons {
+    overflow: hidden;
+}
+.dp{
+    display: block;
+    height: 40px;
+}
