@@ -22,7 +22,7 @@ google = oauth.remote_app(
     consumer_key=os.getenv('GOOGLE_CLIENT_ID'),
     consumer_secret=os.getenv('GOOGLE_CLIENT_SECRET'),
     request_token_params={
-        'scope': 'openid',  # Adjust scopes as needed
+        'scope': "email",
         'include_granted_scopes': 'true',
     },
     base_url='https://accounts.google.com/o/oauth2/v2/auth',
@@ -104,6 +104,7 @@ def account():
 
 @app.route('/google/login')
 def google_login():
+    print(url_for('google_authorized', _external=True))
     return google.authorize(callback=url_for('google_authorized', _external=True))
 
 
@@ -119,6 +120,7 @@ def google_authorized():
     session['google_token'] = access_token
     user_id = "user_id"
     user_info = google.get('https://www.googleapis.com/oauth2/v2/userinfo').data
+
     
 
     # Simulated user database
