@@ -58,7 +58,7 @@ select~label::after {
 /* For desktops with a minimum width of 768px */
 @media (min-width: 768px) {
   .tally-counter{
-      width: 110px;
+      width: 115px;
   }
 }
 
@@ -82,3 +82,16 @@ select~label::after {
   width:50px;
 }
 
+.question-box{
+  position: absolute;
+}
+.question-box question{
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.question-box options label{
+  color: white;
+  display: block;
+  margin-bottom: 5px;
+}
