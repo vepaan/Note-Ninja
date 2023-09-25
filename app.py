@@ -22,7 +22,7 @@ google = oauth.remote_app(
     consumer_key=os.getenv('GOOGLE_CLIENT_ID'),
     consumer_secret=os.getenv('GOOGLE_CLIENT_SECRET'),
     request_token_params={
-        'scope': "email",
+        'scope': ["profile",'email'],
         'include_granted_scopes': 'true',
     },
     base_url='https://accounts.google.com/o/oauth2/v2/auth',
@@ -119,7 +119,7 @@ def google_authorized():
     access_token= (response['access_token'], '')
     session['google_token'] = access_token
     user_id = "user_id"
-    user_info = google.get('https://www.googleapis.com/oauth2/v2/userinfo').data
+    user_info = google.get('https://www.googleapis.com/oauth2/v3/userinfo').data
 
     
 
@@ -147,8 +147,27 @@ def google_logout():
 
 
 @app.route('/practice')
+@login_required
 def practice():
-    return render_template("practice.html", active="practice")
+    files = []
+    folder_path = "static/questions/physics"
+    if os.path.exists(folder_path):
+        file_names = sorted(os.listdir(folder_path))
+        files = [" ".join(f.split(" ")[1::]).split(".")[0] for f in
+                 sorted(file_names, key=lambda f: int(f.split(" ")[0]))]
+        files_phy = files
+
+    folder_path = "static/questions/chemistry"
+    if os.path.exists(folder_path):
+        file_names = sorted(os.listdir(folder_path))
+        files = [" ".join(f.split(" ")[1::]).split(".")[0] for f in
+                 sorted(file_names, key=lambda f: int(f.split(" ")[0]))]
+
+    return render_template("practice.html", active="practice", files_phy=files_phy, files_chem=files)
+
+@app.route('/quiz')
+def quiz():
+    return render_template('quiz.html')
 
 @app.route('/logout')
 def logout():
