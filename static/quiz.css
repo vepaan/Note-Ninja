@@ -48,21 +48,23 @@ select~label::after {
 }
 */
 
-.tally-counter{
+.tally-counter {
   position: absolute;
   z-index: 20;
-  top:10%;
-  left:50%;
+  top: 10%;
+  left: 50%;
   text-align: center;
 }
-@media (min-width: 751px){
-  .tally-counter{
-    width: 115px;
+
+@media (min-width: 46.875em) { /* Equivalent to 751px / 16px = 46.875em */
+  .tally-counter {
+      width: 6.875em; /* Equivalent to 110px / 16px = 6.875em */
   }
 }
-@media (max-width: 750px){
-  .tally-counter{
-    width: 55px;
+
+@media (max-width: 46.875em) { /* Equivalent to 750px / 16px = 46.875em */
+  .tally-counter {
+      width: 3.4375em; /* Equivalent to 55px / 16px = 3.4375em */
   }
 }
 .button-container{
