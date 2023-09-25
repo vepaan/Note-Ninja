@@ -57,8 +57,6 @@ select~label::after {
   text-align: center;
 }
 
-
-
 .button-container{
   position: absolute;
   z-index: 20;
