@@ -49,9 +49,10 @@ select~label::after {
 */
 
 .tally-counter{
+  display: flex;
   position: absolute;
   z-index: 20;
-  top:50%;
+  top:10%;
   left:50%;
   text-align: center;
 }
