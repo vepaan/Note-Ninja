@@ -141,7 +141,7 @@ def google_authorized():
     login_user(users[user_id])
     # Store the Google access token in the session
 
-    return redirect(url_for('login'))
+    return redirect(url_for('notes'))
 
 
 @google.tokengetter
