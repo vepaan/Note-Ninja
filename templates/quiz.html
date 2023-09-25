@@ -5,38 +5,77 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='quiz.js')}}" defer></script>
+    <script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>
 {% endblock %}
 
 {% block body %}
     <div class="bg"></div>
-    <div class="containt-main">
-        <div class="info-bar">
-            <span class="badge text-bg-warning">Score: --</span>
-            <span class="badge text-bg-info">Qno: --</span>
-            <span class="badge text-bg-light">--:--:--</span>
-            <div class="btn-group">
-                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    Difficulty Level
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-                    <li><button class="dropdown-item" href="#">Easy</a></li>
-                    <li><button class="dropdown-item" href="#">Difficult</a></li>
-                </ul>
-            </div>
-            <!--
-            <div class="form-floating">
-                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                  <option value="1">Easy</option>
-                  <option value="2">Difficult</option>
-                </select>
-                <label for="floatingSelect">Difficulty Level</label>
-            </div>
-            -->
-            <a id="start" class="btn btn-primary" href="#" role="button">Start</a>
-        </div>
-        <div id="question">
-            <!-- Question and Answer box here-->
-        </div>
-        <div id="video"></div>
+    <style>
+    .counter {
+        display: inline-block;
+        height: 35px;
+        border: 2px solid white;
+        border-radius: 5px;
+        margin: 18px 7px 0 0;
+    }
+
+    .counter:nth-child(5n) {
+        transform: rotate(300deg);
+        height: 50px;
+        position: relative;
+        left: -25px;
+        top: 7px;
+        margin-right: 10px;
+        margin-top: -15px;
+    }
+
+    /* Styles for desktops with a minimum width of 768px */
+    @media (min-width: 768px) {
+        .counter {
+            display: inline-block;
+        }
+    }
+
+    /* Styles for mobile devices with a maximum width of 767px */
+    @media (max-width: 767px) {
+        .counter {
+            transform: scale(0.8); /* Scale down by a factor of 0.8 */
+            /* Add any additional mobile-specific styles here */
+        }
+        .counter:nth-child(5n){
+            transform: rotate(300deg) scale(0.9);
+        }
+    }
+    </style>
+
+    <div class="tally-counter">
+        <div id="count"></div>
     </div>
+
+    <div class="button-container">
+        <button id="tally" class="buttonstyler">Start</button>
+    </div>
+    
+    <script>
+    var counter = 0; // Initialize counter
+
+    $('#tally').click(function(){
+    if (counter < 15) {
+        $('<div />').prop('class','counter').appendTo('#count');
+        counter++; // Increment the counter
+        if (counter === 1) {
+            $(this).text('Stop');
+        }
+    
+    } else {
+        // Display an alert
+        var confirmation = confirm("Are you sure you want to end the quiz?");
+        if (confirmation) {
+            // Redirect to a local file
+            window.location.href = "answerpage.html";
+        }
+    }
+    return false;
+    });
+    </script>
 {% endblock %}

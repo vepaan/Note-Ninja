@@ -47,3 +47,38 @@ select~label::after {
   background-color: rgb(5, 255, 138)!important;
 }
 */
+
+.tally-counter{
+  position: absolute;
+  z-index: 20;
+  top:50%;
+  left:50%;
+  text-align: center;
+}
+/* For desktops with a minimum width of 768px */
+@media (min-width: 768px) {
+  .tally-counter{
+      width: 110px;
+  }
+}
+
+/* For mobile devices with a maximum width of 767px */
+@media (max-width: 767px) {
+  .tally-counter {
+      width: 55px;
+  }
+}
+
+.button-container{
+  position: absolute;
+  z-index: 20;
+  top:10%;
+  left:20%;
+}
+
+.buttonstyler{
+  background-color:yellowgreen;
+  height: 50px;
+  width:50px;
+}
+

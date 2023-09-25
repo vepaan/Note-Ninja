@@ -18,7 +18,3 @@ function start(){
     }
 }
 
-function reset(){
-    clearInterval(timer);
-    start();
-}
