@@ -40,7 +40,7 @@ class User(UserMixin):
 
 # Simulated user database (replace this with your real user management system)
 users = {"user_id": User("user_id")}  # Replace "user_id" with actual user data
-user_info = {}
+session["user_info"] = {}
 
 
 @login_manager.user_loader
@@ -49,12 +49,12 @@ def load_user(user_id):
 
 @app.context_processor
 def inject_data():
-    return dict(user_info=user_info)
+    return dict(user_info=session["user_info"])
 
 
 @app.route('/')
 def main():
-    print(user_info)
+    print(session["user_info"])
     return render_template("index.html", active="home")
 
 
@@ -92,7 +92,7 @@ def login():
             message = "Login failed. Invalid user ID."
 
         return render_template("login.html", active=None,message=message)
-    cprint(user_info,'yellow')
+    cprint(session["user_info"],'yellow')
     if current_user.is_authenticated:
         return redirect(url_for("account"))
     return render_template("login.html", active=None)
@@ -100,7 +100,7 @@ def login():
 @app.route("/account")
 @login_required
 def account():
-    return render_template("account.html",user_info=user_info)
+    return render_template("account.html",user_info=session["user_info"])
 
 @app.route('/google/login')
 def google_login():
@@ -110,7 +110,6 @@ def google_login():
 
 @app.route('/google/authorized')
 def google_authorized():
-    global user_info
     response = google.authorized_response()
     if response is None:
         cprint('Google login failed.', 'red')
@@ -120,7 +119,7 @@ def google_authorized():
     session['google_token'] = access_token
     user_id = "user_id"
     user_info = google.get('https://www.googleapis.com/oauth2/v3/userinfo').data
-
+    session['user_info'] = user_info
     
 
     # Simulated user database
@@ -172,7 +171,7 @@ def quiz():
 @app.route('/logout')
 def logout():
     logout_user()
-    user_info.clear()
+    session["user_info"].clear()
     return redirect(url_for('login'))
 
 
