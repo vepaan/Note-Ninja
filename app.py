@@ -85,7 +85,6 @@ def login():
         if user_id in users:
             user = users[user_id]
             login_user(user)
-            app.app_context().push()
             message = "Login successful"
             return redirect(url_for('notes'))
         else:
