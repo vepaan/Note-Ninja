@@ -40,7 +40,6 @@ class User(UserMixin):
 
 # Simulated user database (replace this with your real user management system)
 users = {"user_id": User("user_id")}  # Replace "user_id" with actual user data
-session["user_info"] = {}
 
 
 @login_manager.user_loader
@@ -54,6 +53,7 @@ def inject_data():
 
 @app.route('/')
 def main():
+    session["user_info"] = {}
     print(session["user_info"])
     return render_template("index.html", active="home")
 
