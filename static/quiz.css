@@ -57,20 +57,6 @@ select~label::after {
   text-align: center;
 }
 
-/* For desktops with a minimum width of 768px */
-@media (min-width: 740px) {
-  .tally-counter{
-      width: 115px;
-  }
-}
-
-/* For mobile devices with a maximum width of 767px */
-@media (max-width: 739px) {
-  .tally-counter {
-      width: 55px;
-  }
-}
-
 
 .button-container{
   position: absolute;
