@@ -48,13 +48,14 @@ def load_user(user_id):
 
 @app.context_processor
 def inject_data():
+    if not session.get("user_info",False):
+        session["user_info"] = {}
     return dict(user_info=session["user_info"])
+
 
 
 @app.route('/')
 def main():
-    session["user_info"] = {}
-    print(session["user_info"])
     return render_template("index.html", active="home")
 
 
@@ -91,7 +92,6 @@ def login():
             message = "Login failed. Invalid user ID."
 
         return render_template("login.html", active=None,message=message)
-    cprint(session["user_info"],'yellow')
     if current_user.is_authenticated:
         return redirect(url_for("account"))
     return render_template("login.html", active=None)
