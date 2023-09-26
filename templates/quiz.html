@@ -66,24 +66,24 @@
         });
         </script>
         <div class="question-box">
-            <question>Be my mirror my sword my shield. This is paris saint german club and we will not release mbappe. do what you will madrid. Each thruster exerts a force of 40N on the satellite. The line of action of each force is a
-                perpendicular distance of 2.3 m from the centre of gravity of the satellite. These two parallel
-                forces act in opposite directions.</question>
-            <!--
-            <options>
-                <label><input type="radio" name="q1" value="paris"> Paris</label><br>
-                <label><input type="radio" name="q1" value="london"> London</label><br>
-                <label><input type="radio" name="q1" value="berlin"> Berlin</label><br>
-                <label><input type="radio" name="q1" value="berlin"> Berlin</label><br>
-                <label><input type="radio" name="q1" value="berlin"> Berlin</label><br>
-            </options>
-            -->
+            <question>{{ data.pop(0) }}</question>
             <option-new>
-                <button>Hello</button>
-                <button>Navi</button>
-                <button>hi</button>
-                <button>hola</button>
+                {% for option in data %}
+                <form action="/quiz" method="POST">
+                    <input type="hidden" name="answer" value="{{ option }}">
+                    <button>{{ option }}</button>
+                </form>
+                {% endfor %}
             </option-new>
         </div>
     </div>
 {% endblock %}
+<!--
+<options>
+    <label><input type="radio" name="q1" value="paris"> Paris</label><br>
+    <label><input type="radio" name="q1" value="london"> London</label><br>
+    <label><input type="radio" name="q1" value="berlin"> Berlin</label><br>
+    <label><input type="radio" name="q1" value="berlin"> Berlin</label><br>
+    <label><input type="radio" name="q1" value="berlin"> Berlin</label><br>
+</options>
+-->

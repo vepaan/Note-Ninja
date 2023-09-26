@@ -135,13 +135,13 @@ html {
 }
 */
 
-.question-box option-new {
+form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.question-box option-new button {
+.question-box option-new form button {
   color: white;
   position: relative;
   outline: 2px solid white;
@@ -157,20 +157,20 @@ html {
   transition: 0.3s; /* Add transition for smooth effect */
 }
 @media (max-width: 768px){
-  .question-box option-new button{
+  .question-box option-new form button{
     width: calc(100% - 1.2rem);
     padding: 0.6rem;
     margin-bottom: 0.8rem;
   }
 }
-.question-box option-new button:hover {
+.question-box option-new form button:hover {
   box-shadow: 0 0 20px rgba(0, 128, 0, 0.5);
 }
-.question-box option-new button:active {
+.question-box option-new form button:active {
   background-color: rgba(0,128,0,.5) !important;
   color: white !important;
 }
-.question-box option-new button:focus {
+.question-box option-new form button:focus {
   background-color: rgba(0,128,0,.5) !important;
   color: white !important;
 }
@@ -178,3 +178,4 @@ html {
 .question box pic img{
   position: relative;
 }
+
