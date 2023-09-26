@@ -69,7 +69,6 @@ html {
 }
 
 .button-container{
-  position: relative;
   z-index: 20;
   top:90%;
   left:20%;

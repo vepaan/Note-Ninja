@@ -128,7 +128,7 @@ def google_authorized():
     login_user(users[user_id])
     # Store the Google access token in the session
 
-    return redirect(url_for('login'))
+    return redirect(url_for('notes'))
 
 
 @google.tokengetter
@@ -164,7 +164,9 @@ def practice():
     return render_template("practice.html", active="practice", files_phy=files_phy, files_chem=files)
 
 @app.route('/quiz')
+@login_required
 def quiz():
+
     return render_template('quiz.html')
 
 @app.route('/logout')
