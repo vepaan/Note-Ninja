@@ -55,26 +55,23 @@ html {
 .tally-counter {
   position: absolute;
   z-index: 20;
-  top: 10%; /* 1.6rem (10% of 16px) */
-  left: 50%; /* 8rem (50% of 16px) */
+  top: 13.5%; /* 1.6rem (10% of 16px) */
+  left: 49.5%; /* 8rem (50% of 16px) */
   text-align: center;
+  transform: translate(-50%, -50%);
+  z-index: 40;
 }
-
-@media (min-width: 46.875em) { /* Equivalent to 751px / 16px = 46.875em */
-  .tally-counter {
-      width: 6.875rem; /* Equivalent to 110px / 16px = 6.875rem */
+@media (max-width: 767px) {
+  .tally-counter{
+    top:15%;
+    left: 52%;
   }
 }
 
-@media (max-width: 46.875em) { /* Equivalent to 750px / 16px = 46.875em */
-  .tally-counter {
-      width: 3.4375rem; /* Equivalent to 55px / 16px = 3.4375rem */
-  }
-}
 .button-container{
-  position: absolute;
+  position: relative;
   z-index: 20;
-  top:10%;
+  top:90%;
   left:20%;
 }
 
@@ -86,14 +83,96 @@ html {
 
 .question-box{
   position: absolute;
+  background-color: rgba(51,51,51,.65);
+  left:10%;
+  right: 10%;
+  top:20%;
+  margin-top: 0em;
+  outline: 2px solid white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
 }
+@media (max-width: 767px) {
+  .question-box {
+    top: 22%;
+  }
+}
+
 .question-box question{
   color: white;
   font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 2.2vw;
+  align-items: center;
+  position: relative;
+  top:0%;
+  padding: 1rem;
 }
+/* Apply different styles for mobile devices */
+@media (max-width: 767px) {
+  .question-box question {
+    font-size: 15px; 
+    padding: 0.6rem;
+  }
+}
+
+/*
 .question-box options label{
   color: white;
   display: block;
-  margin-bottom: 5px;
+  position: relative;
+  top: 0%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (max-width: 767px) {
+  .question-box options label {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem; 
+  }
+}
+*/
+
+.question-box option-new {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.question-box option-new button {
+  color: white;
+  position: relative;
+  outline: 2px solid white;
+  background-color: rgba(51,51,51,0);
+  padding: 1rem ;
+  border-radius: 0.625rem;
+  box-sizing: border-box;
+  width: calc(100% - 2rem);
+  margin:auto;
+  margin-bottom: 1.3rem;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s; /* Add transition for smooth effect */
+}
+@media (max-width: 767px){
+  .question-box option-new button{
+    width: calc(100% - 1.2rem);
+    padding: 0.6rem;
+    margin-bottom: 0.8rem;
+  }
+}
+.question-box option-new button:hover {
+  box-shadow: 0 0 20px rgba(0, 128, 0, 0.5);
+}
+.question-box option-new button:active {
+  background-color: rgba(0,128,0,.5) !important;
+  color: white !important;
+}
+.question-box option-new button:focus {
+  background-color: rgba(0,128,0,.5) !important;
+  color: white !important;
+}
+
+.question box pic img{
+  position: relative;
 }
