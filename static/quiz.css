@@ -22,7 +22,7 @@ body {
   margin-top: 5rem;
   left: 50%; 
   transform: translateX(-50%);
-  width: 80%;
+  width: 100%;
 }
 
 .info-bar {
@@ -53,25 +53,28 @@ html {
 }
 
 .tally-counter {
-  position: absolute;
+  position: relative;
   z-index: 20;
-  top: 13.5%; /* 1.6rem (10% of 16px) */
+  top: -7vh; /* 1.6rem (10% of 16px) */
   left: 49.5%; /* 8rem (50% of 16px) */
   text-align: center;
   transform: translate(-50%, -50%);
   z-index: 40;
 }
-@media (max-width: 767px) {
-  .tally-counter{
-    top:15%;
-    left: 52%;
+@media (max-width: 768px) {
+  .content-main{
+    margin-top: 20vh;
+  }
+  .button-container {
+    left: 20px!important;
   }
 }
 
 .button-container{
-  z-index: 20;
-  top:90%;
-  left:20%;
+  position: absolute;
+  top: -8.5vh;
+  left: 10%;
+  z-index: 100;
 }
 
 .buttonstyler{
@@ -92,7 +95,7 @@ html {
   flex-direction: column;
   border-radius: 10px;
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .question-box {
     top: 22%;
   }
@@ -108,7 +111,7 @@ html {
   padding: 1rem;
 }
 /* Apply different styles for mobile devices */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .question-box question {
     font-size: 15px; 
     padding: 0.6rem;
@@ -153,7 +156,7 @@ html {
   cursor: pointer;
   transition: 0.3s; /* Add transition for smooth effect */
 }
-@media (max-width: 767px){
+@media (max-width: 768px){
   .question-box option-new button{
     width: calc(100% - 1.2rem);
     padding: 0.6rem;
