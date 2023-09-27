@@ -183,8 +183,8 @@ def quiz():
             session['stats']['attempted'] +=1
             if session['answer'] == request.form['answer']:
                 session['stats']['score'] +=1
-            print(session['stats'])
         if not session['datas']:
+            session.modified = True
             return redirect('/answerpage')
         data = session['datas'].pop()
         session['mode'] = data.pop(-1)
@@ -197,7 +197,6 @@ def quiz():
 
 @app.route('/answerpage')
 def answerpage():
-    print(session['stats'])
     if 'question_bank' in session:
         return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank']),stats = session['stats'])
     return "<h1>No data to be shown</h1>"
