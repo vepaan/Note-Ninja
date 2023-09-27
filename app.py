@@ -6,6 +6,7 @@ from termcolor import cprint
 import secrets
 import os
 from copy import deepcopy
+from random import shuffle
 
 app = Flask(__name__)
 load_dotenv()
@@ -168,19 +169,21 @@ def practice():
 @app.route('/quiz',methods=['GET', 'POST'])
 @login_required
 def quiz():
+    global session
     if request.method == "POST":
         if "file" in request.form:
             session['stats'] = {'score':0,'attempted':0}
             file = request.form.get('file')
-            session['question_loaded'] = True
             with open(f"static/questions/{file}.csv","r") as f:
                 session['datas'] = [line.strip().split(",") for line in f.readlines()]
+                shuffle(session['datas'])
                 session['question_bank'] = deepcopy(session['datas'])
                 session['answer_bank'] = [data[1] for data in session['datas']]
                     
             
         else:
             session['stats']['attempted'] +=1
+            print()
             if session['answer'] == request.form['answer']:
                 session['stats']['score'] +=1
         if not session['datas']:
@@ -188,16 +191,27 @@ def quiz():
             return redirect('/answerpage')
         data = session['datas'].pop()
         session['mode'] = data.pop(-1)
-        session['answer'] = data[1]
+        session['question'] = data.pop(0)
+        session['answer'] = data[0]
+        shuffle(data)
         session['data'] = data
         return redirect('/quiz')
+    cprint(session,'yellow')
+    if ('displayed' in session) and session['displayed']:
+        keys = ['mode','question','answer','data','datas','answer_bank','question_bank']
+        for key in keys:
+            session.pop(key)
+        session['displayed'] = False
+    cprint(session,'red')
     if 'data' not in session:
-        session['data'] = []
-    return render_template('quiz.html',data=session['data'])
+        print(current_user.is_authenticated)
+        return redirect("/practice")
+    return render_template('quiz.html',data=session['data'],question=session['question'])
 
 @app.route('/answerpage')
 def answerpage():
     if 'question_bank' in session:
+        session['displayed'] = True
         return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank']),stats = session['stats'])
     return "<h1>No data to be shown</h1>"
 
@@ -216,6 +230,7 @@ def not_found(e):
 
 @app.errorhandler(401)
 def not_found(e):
+    print(current_user.is_authenticated)
     return login()
 
 
