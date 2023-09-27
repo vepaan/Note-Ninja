@@ -170,14 +170,13 @@ def practice():
 def quiz():
     if request.method == "POST":
         if "file" in request.form:
-            if 'question_loaded' not in session:
-                session['stats'] = {'score':0,'attempted':0}
-                file = request.form.get('file')
-                session['question_loaded'] = True
-                with open(f"static/questions/{file}.csv","r") as f:
-                    session['datas'] = [line.strip().split(",") for line in f.readlines()]
-                    session['question_bank'] = deepcopy(session['datas'])
-                    session['answer_bank'] = [data[1] for data in session['datas']]
+            session['stats'] = {'score':0,'attempted':0}
+            file = request.form.get('file')
+            session['question_loaded'] = True
+            with open(f"static/questions/{file}.csv","r") as f:
+                session['datas'] = [line.strip().split(",") for line in f.readlines()]
+                session['question_bank'] = deepcopy(session['datas'])
+                session['answer_bank'] = [data[1] for data in session['datas']]
                     
             
         else:
