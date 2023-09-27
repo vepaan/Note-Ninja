@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from termcolor import cprint
 import secrets
 import os
+from copy import deepcopy
 
 app = Flask(__name__)
 load_dotenv()
@@ -153,21 +154,55 @@ def practice():
         file_names = sorted(os.listdir(folder_path))
         files = [" ".join(f.split(" ")[1::]).split(".")[0] for f in
                  sorted(file_names, key=lambda f: int(f.split(" ")[0]))]
-        files_phy = files
+        files_phy = enumerate(files,start=1)
 
     folder_path = "static/questions/chemistry"
     if os.path.exists(folder_path):
         file_names = sorted(os.listdir(folder_path))
         files = [" ".join(f.split(" ")[1::]).split(".")[0] for f in
                  sorted(file_names, key=lambda f: int(f.split(" ")[0]))]
+        files = enumerate(files,start=1)
 
     return render_template("practice.html", active="practice", files_phy=files_phy, files_chem=files)
 
-@app.route('/quiz')
+@app.route('/quiz',methods=['GET', 'POST'])
 @login_required
 def quiz():
+    if request.method == "POST":
+        if "file" in request.form:
+            if 'question_loaded' not in session:
+                session['stats'] = {'score':0,'attempted':0}
+                file = request.form.get('file')
+                session['question_loaded'] = True
+                with open(f"static/questions/{file}.csv","r") as f:
+                    session['datas'] = [line.strip().split(",") for line in f.readlines()]
+                    session['question_bank'] = deepcopy(session['datas'])
+                    session['answer_bank'] = [data[1] for data in session['datas']]
+                    
+            
+        else:
+            session['stats']['attempted'] +=1
+            if session['answer'] == request.form['answer']:
+                session['stats']['score'] +=1
+            print(session['stats'])
+        if not session['datas']:
+            return redirect('/answerpage')
+        data = session['datas'].pop()
+        session['mode'] = data.pop(-1)
+        session['answer'] = data[1]
+        session['data'] = data
+        return redirect('/quiz')
+    if 'data' not in session:
+        session['data'] = []
+    return render_template('quiz.html',data=session['data'])
 
-    return render_template('quiz.html')
+@app.route('/answerpage')
+def answerpage():
+    print(session['stats'])
+    if 'question_bank' in session:
+        return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank']),stats = session['stats'])
+    return "<h1>No data to be shown</h1>"
+
 
 @app.route('/logout')
 def logout():
