@@ -27,8 +27,9 @@ body {
 
 .info-bar {
   position: fixed;
-  top: 14vh;
-  right: 2vw;
+  top: 55vh;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -37,7 +38,6 @@ body {
 .badge {
   font-size: min(20px,2vw)!important;
   width: max(15vw,200px);
-  height: max(2vw,20px);
 }
 /*
 select {
