@@ -77,6 +77,85 @@
             </option-new>
         </div>
     </div>
+    <style>
+        .stopwatch {
+          position: relative;
+          font-size: 2.25rem;
+          outline: 2px solid white;
+          border-radius: 0.625rem;
+          font-weight: bold;
+          color:white;
+          background-color: rgba(51,51,51,.65);
+          text-align: center;
+          left:49%;
+          top: 55vh;
+          width: 11rem;
+          padding: 0.375rem;
+          transform: translate(-50%, -50%);
+        }
+        @media (max-width: 768px){
+            .stopwatch{
+                left:50%;
+            }
+        }
+      </style>
+      </head>
+      <body>
+      <div class="content-main"><div class="stopwatch" id="stopwatch">00:00:00</div></div>
+      
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          let stopwatchElement = document.getElementById('stopwatch');
+          let startTime = localStorage.getItem('startTime');
+          let seconds = 0;
+          let minutes = 0;
+          let hours = 0;
+      
+          // Function to reset localStorage
+          function resetLocalStorage() {
+            localStorage.removeItem('startTime');
+          }
+      
+          // Check if the user navigated from a different page
+          let fromDifferentPage = document.referrer !== window.location.href;
+      
+          // Check if the user navigated to an answer page
+          let isAnswerPage = window.location.href.includes('answerpage');
+          console.log(fromDifferentPage, isAnswerPage)
+          if (fromDifferentPage || isAnswerPage) {
+            resetLocalStorage();
+          }
+      
+          if (startTime) {
+            let now = new Date().getTime();
+            let elapsedTime = Math.floor((now - parseInt(startTime)) / 1000);
+            hours = Math.floor(elapsedTime / 3600);
+            minutes = Math.floor((elapsedTime % 3600) / 60);
+            seconds = elapsedTime % 60;
+          } else {
+            startTime = new Date().getTime();
+            localStorage.setItem('startTime', startTime);
+          }
+      
+          function updateStopwatch() {
+            seconds++;
+            if (seconds >= 60) {
+              seconds = 0;
+              minutes++;
+              if (minutes >= 60) {
+                minutes = 0;
+                hours++;
+              }
+            }
+      
+            let timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            stopwatchElement.textContent = timeString;
+          }
+      
+          setInterval(updateStopwatch, 1000); // Update every 1 second
+        });
+      </script>
+      </body>
 {% endblock %}
 <!--
 <options>
