@@ -76,9 +76,6 @@
                 {% endfor %}
             </option-new>
         </div>
-        <div class="info-bar">
-            <span class="badge text-bg-light">--:--:--</span>
-        </div>
     </div>
     <style>
         .stopwatch {
@@ -104,12 +101,11 @@
       </style>
       </head>
       <body>
-      <div class="content-main"><div class="stopwatch" id="stopwatch">00:00:00</div></div>
+      <div class="content-main"><div class="stopwatch" id="stopwatch">--:--:--</div></div>
       
       <script>
         document.addEventListener("DOMContentLoaded", function() {
           let stopwatchElement = document.getElementById('stopwatch');
-          let startTime = localStorage.getItem('startTime');
           let seconds = 0;
           let minutes = 0;
           let hours = 0;
@@ -117,40 +113,29 @@
           // Function to reset localStorage
           function resetLocalStorage() {
             localStorage.removeItem('startTime');
+            console.log("RESET!!")
           }
       
           // Check if the user navigated from a different page
-          let fromDifferentPage = document.referrer !== window.location.href;
-      
-          // Check if the user navigated to an answer page
-          let isAnswerPage = window.location.href.includes('answerpage');
-          console.log(fromDifferentPage, isAnswerPage)
-          if (fromDifferentPage || isAnswerPage) {
+          let refeshed = window.performance.navigation.type
+          let same_page = document.referrer.includes("/quiz")
+          
+          console.log(window.performance.navigation.type,same_page)
+          if (!refeshed && !same_page) {
             resetLocalStorage();
           }
-      
-          if (startTime) {
+          let startTime = localStorage.getItem('startTime');
+          if (!startTime) {
+              startTime = new Date().getTime();
+              localStorage.setItem('startTime', startTime);
+            }
+
+          function updateStopwatch() {
             let now = new Date().getTime();
             let elapsedTime = Math.floor((now - parseInt(startTime)) / 1000);
             hours = Math.floor(elapsedTime / 3600);
             minutes = Math.floor((elapsedTime % 3600) / 60);
             seconds = elapsedTime % 60;
-          } else {
-            startTime = new Date().getTime();
-            localStorage.setItem('startTime', startTime);
-          }
-      
-          function updateStopwatch() {
-            seconds++;
-            if (seconds >= 60) {
-              seconds = 0;
-              minutes++;
-              if (minutes >= 60) {
-                minutes = 0;
-                hours++;
-              }
-            }
-      
             let timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             stopwatchElement.textContent = timeString;
           }

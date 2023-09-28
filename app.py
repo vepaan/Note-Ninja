@@ -196,13 +196,13 @@ def quiz():
         shuffle(data)
         session['data'] = data
         return redirect('/quiz')
-    cprint(session,'yellow')
+    
     if ('displayed' in session) and session['displayed']:
         keys = ['mode','question','answer','data','datas','answer_bank','question_bank']
         for key in keys:
             session.pop(key)
         session['displayed'] = False
-    cprint(session,'red')
+        
     if 'data' not in session:
         print(current_user.is_authenticated)
         return redirect("/practice")
