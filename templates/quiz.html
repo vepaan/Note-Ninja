@@ -113,14 +113,12 @@
           // Function to reset localStorage
           function resetLocalStorage() {
             localStorage.removeItem('startTime');
-            console.log("RESET!!")
           }
       
           // Check if the user navigated from a different page
           let refeshed = window.performance.navigation.type
           let same_page = document.referrer.includes("/quiz")
           
-          console.log(window.performance.navigation.type,same_page)
           if (!refeshed && !same_page) {
             resetLocalStorage();
           }
