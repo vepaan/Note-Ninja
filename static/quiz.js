@@ -25,8 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Example: Adding a new element dynamically
 var newElement = document.createElement('div');
-newElement.textContent = "New Element";
-document.querySelector('.content-main').appendChild(newElement);
+document.querySelector('.content-main')
 
 adjustContentMainHeight(); // Call the function to adjust the height
 
