@@ -95,3 +95,12 @@ input[type='password'] {
 img {
   height: 45px;
 }
+
+.p-3 {
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+}
+
+#message {
+    text-align: center;
+}

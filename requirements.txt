@@ -1,2 +1,6 @@
 Flask
 gunicorn
+Flask-Login
+Flask-OAuthlib
+termcolor
+python-dotenv

@@ -17,6 +17,7 @@ body {
     color: #FFFFFF; /* Change this to your desired text color */
 }
 .custom-accordion .accordion-item:last-child {
+    border-radius: 5px;
     margin-bottom: 80vh;
     background-color: rgba(51,51,51,.8); 
     color: #FFFFFF;
@@ -67,7 +68,7 @@ body {
 
 .more-notes {
     position: relative;
-    padding:5px;
+    padding:15px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
