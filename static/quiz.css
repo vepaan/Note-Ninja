@@ -42,7 +42,7 @@ html {
 .tally-counter {
   position: absolute;
   z-index: 20;
-  top: -7vh; /* 1.6rem (10% of 16px) */
+  top: 5vh; /* 1.6rem (10% of 16px) */
   left: 49.5%; /* 8rem (50% of 16px) */
   text-align: center;
   transform: translate(-50%, -50%);
@@ -75,7 +75,7 @@ html {
   left:10%;
   right: 10%;
   top:20%;
-  margin-top: 5rem;
+  margin-top: 10rem;
   outline: 2px solid white;
   display: flex;
   flex-direction: column;
