@@ -1,5 +1,5 @@
 body {
-  overflow: hidden;
+  overflow: scroll;
   background-image: none;
   overflow-y: scroll;
   height:auto;
@@ -69,10 +69,9 @@ html {
 .question-box{
   position: absolute;
   background-color: rgba(51,51,51,.65);
-  left:10%;
-  right: 10%;
-  top:20%;
-  margin-top: 10rem;
+  left:5%;
+  right: 5%;
+  top:6rem;
   outline: 2px solid white;
   display: flex;
   flex-direction: column;
@@ -92,7 +91,9 @@ html {
 @media (max-width: 768px) {
   .question-box question {
     font-size: 18px; 
-    padding: 0.6rem;
+  }
+  .question-box{
+    top:5rem;
   }
 }
 
