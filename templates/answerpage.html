@@ -1,11 +1,97 @@
-<h1>{{ stats['score'] }}</h1>
-<h1>{{ stats['attempted'] }}</h1>
-{% for datas_q,answer in data_set %}
-    {% for data in datas_q %}
-    <h1>{{ data }}</h1>
-    {% endfor %}
-    <h1>{{ answer }}</h1>
-    <script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"></style>
+     <script src="https://kit.fontawesome.com/eb018bf6f2.js" crossorigin="anonymous"></script>
+     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='notesninjalogo.png')}}" />
+    <style>
+
+        html{
+            font-size: 16px;
+        }
+
+        body{
+            overflow: scroll;
+        }
+
+        .title-box{
+            position: absolute;
+            padding: 0.5rem;
+            left: 49.5%;
+            top: 4.5rem;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 5rem;
+            font-family: poppins;
+            color: #BD53ED;
+            justify-content: center;
+        }
+        @media (max-width:768px){
+            .title-box{
+                font-size: 3rem;
+                top:5rem;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        #logo{
+            position: relative;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 9.375rem;
+        }
+        .main {
+            position: absolute; 
+            align-items: left;
+            top:13rem;
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 90%;
+            display: grid;
+            outline: 2px solid white;
+        }
+        @media (max-width:768px){
+            .main{
+                top:11rem;
+            }
+        }
+        
+        h1{
+            color:white;
+        }
+
+        h2{
+            color: white;
+        }
+    </style>
+
+<body>
+    
+    <a href='{{ url_for("main") }}' ><img id="logo" style="position: absolute; left:49%; top:2%; height:100px" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
+    <div class="title-box">Answers</div>
+    <div class="main">
+        <h1>{{ stats['score'] }}</h1>
+        <h1>{{ stats['attempted'] }}</h1>
+        {% for datas_q,answer in data_set %}
+            {% for data in datas_q %}
+            <h2>{{ data }}</h2>
+            {% endfor %}
+        <h2>{{ answer }}</h2>
+        <script>
             localStorage.clear();
-     </script>
-{% endfor %}
+        </script>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
