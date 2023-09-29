@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="panel border bg-white">
+            <div class="panel-heading">
+                <h3 class="pt-3 font-weight-bold">Sign Up</h3>
+            </div>
+            <div class="panel-body p-3">
+                <form action="/signup" method="POST">
+                    <div class="form-group py-2">
+                        <div class="input-field"> <span class="far fa-user p-2 fa-solid"></span> <input type="text" placeholder="Username" required> </div>
+                    </div>
+                    <div class="form-group py-2">
+                        <div class="input-field"> <span class="far fa-envelope p-2 fa-solid"></span> <input type="email" placeholder="Email" required> </div>
+                    </div>
+                    <div class="form-group py-1 pb-2">
+                        <div class="input-field"> 
+                            <span class="fas fa-lock px-2"></span> 
+                            <input type="password" id="passwordField" placeholder="Create a Password" required> 
+                            <button  type="button" class="btn bg-white text-muted"> 
+                                <span id="togglePassword" class="far fa-eye-slash"></span> 
+                            </button> 
+                        </div>
+                    </div>
+                    <div class="form-group py-1 pb-2">
+                        <div class="input-field"> 
+                            <span class="fas fa-lock px-2"></span> 
+                            <input type="password" id="confirmPasswordField" placeholder="Confirm Password" required> 
+                            <button  type="button" class="btn bg-white text-muted"> 
+                                <span id="toggleConfirmPassword" class="far fa-eye-slash"></span> 
+                            </button> 
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block mt-3">Sign Up</button>
+                </form>
+                <div style="padding-top:5px!important;" class="text-center pt-4 text-muted">Already have an account? <a href="/login">Log in</a> </div>
+                <div class="text-center py-2">
+                    <button type="button" class="google-sign-in-button" >
+                        Sign in with Google
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script>
+        const passwordField = document.getElementById('passwordField');
+        const confirmPasswordField = document.getElementById('confirmPasswordField');
+        const togglePassword = document.getElementById('togglePassword');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    
+        togglePassword.addEventListener('click', function() {
+            togglePasswordVisibility(passwordField, togglePassword);
+        });
+        
+        toggleConfirmPassword.addEventListener('click', function() {
+            togglePasswordVisibility(confirmPasswordField, toggleConfirmPassword);
+        });
+        
+        function togglePasswordVisibility(inputField, toggleButton) {
+            if (inputField.type === 'password') {
+                inputField.type = 'text';
+                toggleButton.classList.remove('fa-eye-slash');
+                toggleButton.classList.add('fa-eye');
+            } else {
+                inputField.type = 'password';
+                toggleButton.classList.remove('fa-eye');
+                toggleButton.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+{% endblock %}

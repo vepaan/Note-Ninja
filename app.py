@@ -84,19 +84,31 @@ def notes():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user_id = 'user_id'
+        user_id = secrets.token_hex(32)
+        print(request.form['password'])
+        print(request.form['uname'])
+        print(request.form.get('remember',False))
         if user_id in users:
             user = users[user_id]
             login_user(user)
-            message = "Login successful"
             return redirect(url_for('notes'))
         else:
-            message = "Login failed. Invalid user ID."
+            message = "Login failed. Invalid username or password."
 
         return render_template("login.html", active=None,message=message)
     if current_user.is_authenticated:
         return redirect(url_for("account"))
     return render_template("login.html", active=None)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        users['qwe'] = User("qwe")
+
+        return render_template("login.html", active=None,message="")
+    if current_user.is_authenticated:
+        return redirect(url_for("account"))
+    return render_template("signup.html", active=None)
 
 @app.route("/account")
 @login_required
