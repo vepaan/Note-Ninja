@@ -67,7 +67,8 @@ html {
 }
 
 .question-box{
-  position: absolute;
+  position: relative;
+  width: 85.5vw;
   background-color: rgba(51,51,51,.65);
   left:5%;
   right: 5%;
