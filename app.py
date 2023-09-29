@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from termcolor import cprint
 import secrets
 import os
+from copy import deepcopy
+from random import shuffle
 
 app = Flask(__name__)
 load_dotenv()
@@ -22,7 +24,7 @@ google = oauth.remote_app(
     consumer_key=os.getenv('GOOGLE_CLIENT_ID'),
     consumer_secret=os.getenv('GOOGLE_CLIENT_SECRET'),
     request_token_params={
-        'scope': "email",
+        'scope': ["profile",'email'],
         'include_granted_scopes': 'true',
     },
     base_url='https://accounts.google.com/o/oauth2/v2/auth',
@@ -40,7 +42,6 @@ class User(UserMixin):
 
 # Simulated user database (replace this with your real user management system)
 users = {"user_id": User("user_id")}  # Replace "user_id" with actual user data
-user_info = {}
 
 
 @login_manager.user_loader
@@ -49,12 +50,14 @@ def load_user(user_id):
 
 @app.context_processor
 def inject_data():
-    return dict(user_info=user_info)
+    if not session.get("user_info",False):
+        session["user_info"] = {}
+    return dict(user_info=session["user_info"])
+
 
 
 @app.route('/')
 def main():
-    print(user_info)
     return render_template("index.html", active="home")
 
 
@@ -93,7 +96,6 @@ def login():
             message = "Login failed. Invalid username or password."
 
         return render_template("login.html", active=None,message=message)
-    cprint(user_info,'yellow')
     if current_user.is_authenticated:
         return redirect(url_for("account"))
     return render_template("login.html", active=None)
@@ -111,7 +113,7 @@ def signup():
 @app.route("/account")
 @login_required
 def account():
-    return render_template("account.html",user_info=user_info)
+    return render_template("account.html",user_info=session["user_info"])
 
 @app.route('/google/login')
 def google_login():
@@ -121,7 +123,6 @@ def google_login():
 
 @app.route('/google/authorized')
 def google_authorized():
-    global user_info
     response = google.authorized_response()
     if response is None:
         cprint('Google login failed.', 'red')
@@ -130,8 +131,8 @@ def google_authorized():
     access_token= (response['access_token'], '')
     session['google_token'] = access_token
     user_id = "user_id"
-    user_info = google.get('https://www.googleapis.com/oauth2/v2/userinfo').data
-
+    user_info = google.get('https://www.googleapis.com/oauth2/v3/userinfo').data
+    session['user_info'] = user_info
     
 
     # Simulated user database
@@ -158,13 +159,79 @@ def google_logout():
 
 
 @app.route('/practice')
+@login_required
 def practice():
-    return render_template("practice.html", active="practice")
+    files = []
+    folder_path = "static/questions/physics"
+    if os.path.exists(folder_path):
+        file_names = sorted(os.listdir(folder_path))
+        files = [" ".join(f.split(" ")[1::]).split(".")[0] for f in
+                 sorted(file_names, key=lambda f: int(f.split(" ")[0]))]
+        files_phy = enumerate(files,start=1)
+
+    folder_path = "static/questions/chemistry"
+    if os.path.exists(folder_path):
+        file_names = sorted(os.listdir(folder_path))
+        files = [" ".join(f.split(" ")[1::]).split(".")[0] for f in
+                 sorted(file_names, key=lambda f: int(f.split(" ")[0]))]
+        files = enumerate(files,start=1)
+
+    return render_template("practice.html", active="practice", files_phy=files_phy, files_chem=files)
+
+@app.route('/quiz',methods=['GET', 'POST'])
+@login_required
+def quiz():
+    global session
+    if request.method == "POST":
+        if "file" in request.form:
+            session['stats'] = {'score':0,'attempted':0}
+            file = request.form.get('file')
+            with open(f"static/questions/{file}.csv","r") as f:
+                session['datas'] = [line.strip().split(",") for line in f.readlines()]
+                shuffle(session['datas'])
+                session['question_bank'] = deepcopy(session['datas'])
+                session['answer_bank'] = [data[1] for data in session['datas']]
+                    
+            
+        else:
+            session['stats']['attempted'] +=1
+            print()
+            if session['answer'] == request.form['answer']:
+                session['stats']['score'] +=1
+        if not session['datas']:
+            session.modified = True
+            return redirect('/answerpage')
+        data = session['datas'].pop()
+        session['mode'] = data.pop(-1)
+        session['question'] = data.pop(0)
+        session['answer'] = data[0]
+        shuffle(data)
+        session['data'] = data
+        return redirect('/quiz')
+    
+    if ('displayed' in session) and session['displayed']:
+        keys = ['mode','question','answer','data','datas','answer_bank','question_bank']
+        for key in keys:
+            session.pop(key)
+        session['displayed'] = False
+        
+    if 'data' not in session:
+        print(current_user.is_authenticated)
+        return redirect("/practice")
+    return render_template('quiz.html',data=session['data'],question=session['question'])
+
+@app.route('/answerpage')
+def answerpage():
+    if 'question_bank' in session:
+        session['displayed'] = True
+        return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank']),stats = session['stats'])
+    return "<h1>No data to be shown</h1>"
+
 
 @app.route('/logout')
 def logout():
     logout_user()
-    user_info.clear()
+    session["user_info"].clear()
     return redirect(url_for('login'))
 
 
@@ -175,6 +242,7 @@ def not_found(e):
 
 @app.errorhandler(401)
 def not_found(e):
+    print(current_user.is_authenticated)
     return login()
 
 

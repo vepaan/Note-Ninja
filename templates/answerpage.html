@@ -1,0 +1,11 @@
+<h1>{{ stats['score'] }}</h1>
+<h1>{{ stats['attempted'] }}</h1>
+{% for datas_q,answer in data_set %}
+    {% for data in datas_q %}
+    <h1>{{ data }}</h1>
+    {% endfor %}
+    <h1>{{ answer }}</h1>
+    <script>
+            localStorage.clear();
+     </script>
+{% endfor %}
