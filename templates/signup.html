@@ -15,15 +15,15 @@
             <div class="panel-body p-3">
                 <form action="/signup" method="POST">
                     <div class="form-group py-2">
-                        <div class="input-field"> <span class="far fa-user p-2 fa-solid"></span> <input type="text" placeholder="Username" required> </div>
+                        <div class="input-field"> <span class="far fa-user p-2 fa-solid"></span> <input type="text" name="username" placeholder="Username" required> </div>
                     </div>
                     <div class="form-group py-2">
-                        <div class="input-field"> <span class="far fa-envelope p-2 fa-solid"></span> <input type="email" placeholder="Email" required> </div>
+                        <div class="input-field"> <span class="far fa-envelope p-2 fa-solid"></span> <input name="email" type="email" placeholder="Email" required> </div>
                     </div>
                     <div class="form-group py-1 pb-2">
                         <div class="input-field"> 
                             <span class="fas fa-lock px-2"></span> 
-                            <input type="password" id="passwordField" placeholder="Create a Password" required> 
+                            <input name="password" type="password" id="passwordField" placeholder="Create a Password" required> 
                             <button  type="button" class="btn bg-white text-muted"> 
                                 <span id="togglePassword" class="far fa-eye-slash"></span> 
                             </button> 
@@ -32,7 +32,7 @@
                     <div class="form-group py-1 pb-2">
                         <div class="input-field"> 
                             <span class="fas fa-lock px-2"></span> 
-                            <input type="password" id="confirmPasswordField" placeholder="Confirm Password" required> 
+                            <input name="cpassword" type="password" id="confirmPasswordField" placeholder="Confirm Password" required> 
                             <button  type="button" class="btn bg-white text-muted"> 
                                 <span id="toggleConfirmPassword" class="far fa-eye-slash"></span> 
                             </button> 
@@ -41,6 +41,7 @@
                     <button class="btn btn-primary btn-block mt-3">Sign Up</button>
                 </form>
                 <div style="padding-top:5px!important;" class="text-center pt-4 text-muted">Already have an account? <a href="/login">Log in</a> </div>
+                <p style="color: red;font-weight: bold; margin-bottom: 0;" id="message">{{ message }}</p>
                 <div class="text-center py-2">
                     <button type="button" class="google-sign-in-button" >
                         Sign in with Google

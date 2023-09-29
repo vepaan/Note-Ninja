@@ -52,7 +52,7 @@ form {
 }
 
 .btn.btn-primary {
-    margin-top: 20px;
+    margin-top: 0!important;
     border-radius: 15px;
 }
 
