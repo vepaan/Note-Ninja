@@ -38,48 +38,23 @@
         <div class="tally-counter">
             <div id="count"></div>
         </div>
-
-        <div class="button-container">
-            <button id="tally" class="buttonstyler">Start</button>
-        </div>
         
-        <script>
-        var counter = 0; // Initialize counter
-
-        $('#tally').click(function(){
-        if (counter < 15) {
-            $('<div />').prop('class','counter').appendTo('#count');
-            counter++; // Increment the counter
-            if (counter === 1) {
-                $(this).text('Next');
-            }
-        
-        } else {
-            // Display an alert
-            var confirmation = confirm("Are you sure you want to end the quiz?");
-            if (confirmation) {
-                // Redirect to a local file
-                window.location.href = "answerpage.html";
-            }
-        }
-        return false;
-        });
-        </script>
         <div class="question-box">
             <question>{{ question }}</question>
             <option-new>
                 {% for option in data %}
                 <form action="/quiz" method="POST">
                     <input type="hidden" name="answer" value="{{ option }}">
-                    <button>{{ option }}</button>
+                    <button id="tally">{{ option }}</button>
                 </form>
                 {% endfor %}
             </option-new>
         </div>
+        <div class="stopwatch" id="stopwatch">--:--:--</div>
     </div>
     <style>
         .stopwatch {
-          position: relative;
+          position: absolute;
           font-size: 2.25rem;
           outline: 2px solid white;
           border-radius: 0.625rem;
@@ -88,7 +63,7 @@
           background-color: rgba(51,51,51,.65);
           text-align: center;
           left:49%;
-          top: 55vh;
+          top: 10%;
           width: 11rem;
           padding: 0.375rem;
           transform: translate(-50%, -50%);
@@ -101,7 +76,6 @@
       </style>
       </head>
       <body>
-      <div class="content-main"><div class="stopwatch" id="stopwatch">--:--:--</div></div>
       
       <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -139,6 +113,32 @@
           }
       
           setInterval(updateStopwatch, 1000); // Update every 1 second
+        });
+
+        // Tally
+        var counter = 0; // Initialize counter
+
+        $('#tally').click(function(){
+        if (counter < 15) {
+            counter = localStorage.getItem("counter")
+            if (!counter){
+                counter = 0
+            }
+            $('<div />').prop('class','counter').appendTo('#count');
+            counter++; // Increment the counter
+            if (counter === 1) {
+                $(this).text('Next');
+            }
+        
+        } else {
+            // Display an alert
+            var confirmation = confirm("Are you sure you want to end the quiz?");
+            if (confirmation) {
+                // Redirect to a local file
+                window.location.href = "answerpage.html";
+            }
+        }
+        return false;
         });
       </script>
       </body>
