@@ -106,20 +106,23 @@
     <a href='{{ url_for("main") }}' ><img id="logo" style="position: absolute; left:49%; top:2%; height:100px" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
     <div class="content-main">
         <div class="title-box">Answers</div>
-        <div class="main">
-            <h1> <span class="purple">Score:</span> {{ stats['score'] }}</h1>
-            <h1> <span class="purple">Attempted:</span> {{ stats['attempted'] }}</h1>
-            {% for datas_q,answer,user_answer in data_set %}
-                {% for index,data in enumerate(datas_q,start=1) %}
-                    {% if index == 1 %}
-                    <h2 style="color: rebeccapurple;">{{ data }}</h2>
-                    {% else %}
-                    <h3 style="color: chocolate;">{{ data }}</h2>
-                    {% endif %}
+        <div style="display: flex-box; gap: 10px;" class="main">
+            <h1 style="margin: 0!important;" > <span class="purple">Score:</span> {{ stats['score'] }}</h1>
+            <h1 style="margin: 0!important;" > <span class="purple">Attempted:</span> {{ stats['attempted'] }}</h1>
+                {% for datas_q,answer,user_answer in data_set %}
+                <div style=" background-color: rgba(51,51,51,.65); border:1px solid white; padding: 20px;" class="box">
+                    {% for index,data in enumerate(datas_q,start=1) %}
+                        {% if index == 1 %}
+                        <h2 style="color: rebeccapurple;">{{ data }}</h2>
+                        {% else %}
+                        <h3 style="color: chocolate;">{{ data }}</h2>
+                        {% endif %}
+                    {% endfor %}
+                    <h2><span class="purple">Your Answer: </span> <span style="color: {{ user_answer[1] }}">{{ user_answer[0] }}</span></h2>
+                    <h2><span class="purple">True Answer: </span> <span style="color: green;">{{ answer }}</span></h2>
+                </div>
                 {% endfor %}
-            <h2><span class="purple">Your Answer: </span style="color: {{ user_answer[1] }}">{{ user_answer[0] }}</h2>
-            <h2><span class="purple">True Answer: </span style="color: green;">{{ answer }}</h2>
-            {% endfor %}
+            
         </div>
         <script>
             localStorage.clear();
