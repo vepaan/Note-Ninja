@@ -113,8 +113,8 @@
                 {% for data in datas_q %}
                 <h2>{{ data }}</h2>
                 {% endfor %}
-            <h2>{{ answer }}</h2>
-            <h2>{{ user_answer }}</h2>
+            <h2><span class="purple">Your Answer: </span>{{ user_answer }}</h2>
+            <h2><span class="purple">True Answer: </span>{{ answer }}</h2>
             {% endfor %}
         </div>
         <script>
