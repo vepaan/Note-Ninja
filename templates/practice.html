@@ -7,6 +7,14 @@
 {% endblock %}
 
 {% block body %}
+<style>
+  button{
+    background-color: rgba(0,0,0,0);
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+</style>
 <div class="bg"></div>
 <div class="containt-main">
   <div class="notes-div">
@@ -24,9 +32,9 @@
               <form action="/quiz" method="POST">
                 <div class="custom-pdf-icon">
                   <input name="file" value="physics/{{index}} {{ file }}" type="hidden">
-                  <button >
-                    <i class="fa fa-file-pdf-o"></i>
-                    <span style="color: black;" class="pdf-text">{{file}}</span>
+                  <button>
+                    <i class="fas fa-question-circle" style="color:blue;"></i>
+                    <span class="pdf-text">{{file}}</span>
                   </button>
                 </div>
               </form>  
@@ -48,9 +56,9 @@
               <form action="/quiz" method="POST">
                 <div class="custom-pdf-icon">
                   <input name="file" value="chemistry/{{index}} {{ file }}" type="hidden">
-                  <button >
-                    <i class="fa fa-file-pdf-o"></i>
-                    <span style="color: black;" class="pdf-text">{{file}}</span>
+                  <button>
+                    <i class="fas fa-question-circle" style="color:blue"></i>
+                    <span class="pdf-text">{{file}}</span>
                   </button>
                 </div>
               </form>  

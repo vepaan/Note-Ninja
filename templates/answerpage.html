@@ -58,7 +58,6 @@
             transform: translateX(-50%);
             width: 90%;
             display: grid;
-            outline: 2px solid white;
         }
         @media (max-width:768px){
             .main{
@@ -73,15 +72,17 @@
         h2{
             color: white;
         }
+        .purple{
+            color: #BD53ED
+        }
     </style>
 
 <body>
-    
     <a href='{{ url_for("main") }}' ><img id="logo" style="position: absolute; left:49%; top:2%; height:100px" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
     <div class="title-box">Answers</div>
     <div class="main">
-        <h1>{{ stats['score'] }}</h1>
-        <h1>{{ stats['attempted'] }}</h1>
+        <h1> <span class="purple">Score:</span> {{ stats['score'] }}</h1>
+        <h1> <span class="purple">Attempted:</span> {{ stats['attempted'] }}</h1>
         {% for datas_q,answer in data_set %}
             {% for data in datas_q %}
             <h2>{{ data }}</h2>
@@ -92,6 +93,5 @@
         </script>
         {% endfor %}
     </div>
-
 </body>
 </html>
