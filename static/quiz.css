@@ -60,11 +60,6 @@ html {
   z-index: 100;
 }
 
-.buttonstyler{
-  background-color:yellowgreen;
-  height: 50px;
-  width:50px;
-}
 
 .question-box{
   position: relative;

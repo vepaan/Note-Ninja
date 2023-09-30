@@ -14,8 +14,32 @@
             font-size: 16px;
         }
 
-        body{
+        body {
             overflow: scroll;
+            background-image: none;
+            overflow-y: scroll;
+            height:auto;
+            line-height: 1.2!important;
+        }
+
+        .bg {
+            top:0;
+            left: 0;
+            background: url("../static/maindesign1.png");
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            z-index: -1;
+        }
+
+        .content-main{
+        position: absolute;
+        top:5rem;
+        left: 50%; 
+        transform: translateX(-50%);
+        width: 95%;
+        display: flex;
+        flex-direction: column;
         }
 
         .title-box{
@@ -78,21 +102,25 @@
     </style>
 
 <body>
-    <a href='{{ url_for("main") }}' ><img id="logo" style="position: absolute; left:49%; top:2%; height:100px" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
-    <div class="title-box">Answers</div>
-    <div class="main">
-        <h1> <span class="purple">Score:</span> {{ stats['score'] }}</h1>
-        <h1> <span class="purple">Attempted:</span> {{ stats['attempted'] }}</h1>
-        {% for datas_q,answer,user_answer in data_set %}
-            {% for data in datas_q %}
-            <h2>{{ data }}</h2>
+    <div class="bg"></div> 
+    <div class="content-main">
+        <a href='{{ url_for("main") }}' ><img id="logo" style="position: absolute; left:49%; top:2%; height:100px" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
+        <div class="title-box">Answers</div>
+        <div class="main">
+            <h1> <span class="purple">Score:</span> {{ stats['score'] }}</h1>
+            <h1> <span class="purple">Attempted:</span> {{ stats['attempted'] }}</h1>
+            {% for datas_q,answer,user_answer in data_set %}
+                {% for data in datas_q %}
+                <h2>{{ data }}</h2>
+                {% endfor %}
+            <h2>{{ answer }}</h2>
+            <h2>{{ user_answer }}</h2>
             {% endfor %}
-        <h2>{{ answer }}</h2>
-        <h2>{{ user_answer }}</h2>
+        </div>
         <script>
             localStorage.clear();
         </script>
-        {% endfor %}
+        
     </div>
 </body>
 </html>

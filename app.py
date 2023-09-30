@@ -219,10 +219,13 @@ def quiz():
         else:
             session['stats']['attempted'] +=1
             answer = request.form['answer']
+            print(answer)
             session['user_answers'].append( answer )
+            print(session['user_answers'])
             if session['answer'] == answer:
                 session['stats']['score'] +=1
         if not session['datas']:
+            print(*zip(session["question_bank"],session["user_answers"]),sep="\n")
             session.modified = True
             return redirect('/answerpage')
         data = session['datas'].pop()
@@ -239,7 +242,7 @@ def quiz():
         for key in keys:
             session.pop(key)
         session['displayed'] = False
-          
+
     if 'data' not in session:
         return redirect("/practice")
     return render_template('quiz.html',data=session['data'],question=session['question'])
@@ -248,6 +251,7 @@ def quiz():
 def answerpage():
     if 'question_bank' in session:
         session['displayed'] = True
+        session["user_answers"] = list(reversed(session["user_answers"]))
         return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank'],session['user_answers']),stats = session['stats'])
     return "<h1>No data to be shown</h1>"
 
