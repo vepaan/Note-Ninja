@@ -4,3 +4,4 @@ Flask-Login
 Flask-OAuthlib
 termcolor
 python-dotenv
+Flask-sqlalchemy
