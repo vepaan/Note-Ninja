@@ -117,8 +117,8 @@
                     <h3 style="color: chocolate;">{{ data }}</h2>
                     {% endif %}
                 {% endfor %}
-            <h2 style="color: green;">{{ answer }}</h2>
-            <h2 style="color: {{ user_answer[1] }}">{{ user_answer[0] }}</h2>
+            <h2><span class="purple">Your Answer: </span style="color: {{ user_answer[1] }}">{{ user_answer[0] }}</h2>
+            <h2><span class="purple">True Answer: </span style="color: green;">{{ answer }}</h2>
             {% endfor %}
         </div>
         <script>
