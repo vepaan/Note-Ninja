@@ -34,7 +34,7 @@
 
         .content-main{
         position: absolute;
-        top:5rem;
+        top:.4rem;
         left: 50%; 
         transform: translateX(-50%);
         width: 95%;
@@ -103,8 +103,8 @@
 
 <body>
     <div class="bg"></div> 
+    <a href='{{ url_for("main") }}' ><img id="logo" style="position: absolute; left:49%; top:2%; height:100px" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
     <div class="content-main">
-        <a href='{{ url_for("main") }}' ><img id="logo" style="position: absolute; left:49%; top:2%; height:100px" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
         <div class="title-box">Answers</div>
         <div class="main">
             <h1> <span class="purple">Score:</span> {{ stats['score'] }}</h1>

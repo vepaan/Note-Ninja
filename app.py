@@ -219,13 +219,10 @@ def quiz():
         else:
             session['stats']['attempted'] +=1
             answer = request.form['answer']
-            print(answer)
             session['user_answers'].append( answer )
-            print(session['user_answers'])
             if session['answer'] == answer:
                 session['stats']['score'] +=1
         if not session['datas']:
-            print(*zip(session["question_bank"],session["user_answers"]),sep="\n")
             session.modified = True
             return redirect('/answerpage')
         data = session['datas'].pop()
@@ -236,7 +233,6 @@ def quiz():
         session['data'] = data
         return redirect('/quiz')
     
-    print((('displayed' in session) and session['displayed']))
     if ('displayed' in session) and session['displayed']:
         keys = ['mode','question','answer','data','datas','answer_bank','question_bank']
         for key in keys:
@@ -270,7 +266,6 @@ def not_found(e):
 
 @app.errorhandler(401)
 def not_found(e):
-    print(current_user.is_authenticated)
     return redirect(url_for("login"))
 
 
