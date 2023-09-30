@@ -213,12 +213,14 @@ def quiz():
                 shuffle(session['datas'])
                 session['question_bank'] = deepcopy(session['datas'])
                 session['answer_bank'] = [data[1] for data in session['datas']]
+                session['user_answers'] = []
                     
             
         else:
             session['stats']['attempted'] +=1
-            print()
-            if session['answer'] == request.form['answer']:
+            answer = request.form['answer']
+            session['user_answers'].append( answer )
+            if session['answer'] == answer:
                 session['stats']['score'] +=1
         if not session['datas']:
             session.modified = True
@@ -231,14 +233,14 @@ def quiz():
         session['data'] = data
         return redirect('/quiz')
     
+    print((('displayed' in session) and session['displayed']))
     if ('displayed' in session) and session['displayed']:
         keys = ['mode','question','answer','data','datas','answer_bank','question_bank']
         for key in keys:
             session.pop(key)
         session['displayed'] = False
-        
+          
     if 'data' not in session:
-        print(current_user.is_authenticated)
         return redirect("/practice")
     return render_template('quiz.html',data=session['data'],question=session['question'])
 
@@ -246,7 +248,7 @@ def quiz():
 def answerpage():
     if 'question_bank' in session:
         session['displayed'] = True
-        return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank']),stats = session['stats'])
+        return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank'],session['user_answers']),stats = session['stats'])
     return "<h1>No data to be shown</h1>"
 
 
