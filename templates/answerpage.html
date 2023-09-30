@@ -33,14 +33,14 @@
         }
 
         .content-main{
-        position: absolute;
-        top:.4rem;
-        left: 50%; 
-        transform: translateX(-50%);
-        width: 95%;
-        display: flex;
-        flex-direction: column;
-        }
+            position: absolute;
+            top:.4rem;
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+            }
 
         .title-box{
             position: absolute;
@@ -110,11 +110,15 @@
             <h1> <span class="purple">Score:</span> {{ stats['score'] }}</h1>
             <h1> <span class="purple">Attempted:</span> {{ stats['attempted'] }}</h1>
             {% for datas_q,answer,user_answer in data_set %}
-                {% for data in datas_q %}
-                <h2>{{ data }}</h2>
+                {% for index,data in enumerate(datas_q,start=1) %}
+                    {% if index == 1 %}
+                    <h2 style="color: rebeccapurple;">{{ data }}</h2>
+                    {% else %}
+                    <h3 style="color: chocolate;">{{ data }}</h2>
+                    {% endif %}
                 {% endfor %}
-            <h2>{{ answer }}</h2>
-            <h2>{{ user_answer }}</h2>
+            <h2 style="color: green;">{{ answer }}</h2>
+            <h2 style="color: {{ user_answer[1] }}">{{ user_answer[0] }}</h2>
             {% endfor %}
         </div>
         <script>

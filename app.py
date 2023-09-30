@@ -219,9 +219,11 @@ def quiz():
         else:
             session['stats']['attempted'] +=1
             answer = request.form['answer']
-            session['user_answers'].append( answer )
             if session['answer'] == answer:
                 session['stats']['score'] +=1
+                session['user_answers'].append( (answer,"green") )
+            else:
+                 session['user_answers'].append( (answer,"red") )
         if not session['datas']:
             session.modified = True
             return redirect('/answerpage')
@@ -248,7 +250,8 @@ def answerpage():
     if 'question_bank' in session:
         session['displayed'] = True
         session["user_answers"] = list(reversed(session["user_answers"]))
-        return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank'],session['user_answers']),stats = session['stats'])
+        print(list(zip(*enumerate(session['question_bank'],start=1),session['answer_bank'],session['user_answers'])))
+        return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank'],session['user_answers']),stats = session['stats'],enumerate=enumerate)
     return "<h1>No data to be shown</h1>"
 
 
