@@ -6,7 +6,9 @@ from termcolor import cprint
 from copy import deepcopy
 from random import shuffle
 from models import db, User
+from markupsafe import Markup
 import secrets
+import csv
 import os
 
 app = Flask(__name__)
@@ -209,7 +211,9 @@ def quiz():
             session['stats'] = {'score':0,'attempted':0}
             file = request.form.get('file')
             with open(f"static/questions/{file}.csv","r") as f:
-                session['datas'] = [line.strip().split(",") for line in f.readlines()]
+                csvreader = csv.reader(f)
+                session['datas'] = list(csvreader)
+                print(session['datas'])
                 shuffle(session['datas'])
                 session['question_bank'] = deepcopy(session['datas'])
                 session['answer_bank'] = [data[1] for data in session['datas']]
@@ -244,7 +248,8 @@ def quiz():
 
     if 'data' not in session:
         return redirect("/practice")
-    return render_template('quiz.html',data=session['data'],question=session['question'])
+    print(session['data'])
+    return render_template('quiz.html',data=session['data'],question=Markup(session['question']))
 
 @app.route('/answerpage')
 def answerpage():
