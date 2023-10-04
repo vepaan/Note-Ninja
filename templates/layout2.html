@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"></style>
+     <script src="https://kit.fontawesome.com/eb018bf6f2.js" crossorigin="anonymous"></script>
+     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='notesninjalogo.png')}}" />
+     <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+      </script>
+      <script defer src="/_vercel/insights/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <style>
+
+        h1 {
+            font-size: max(7vw,25px);
+            color: #BD53ED;
+            margin: 0;
+            text-align: center;
+        }
+
+        p {
+            font-size: max(15px,1.7vw);
+            color: #ffffff;
+            margin: 0 0 17px 0;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        #logo{
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: min(150px,23vw);
+        }
+        .main {
+            display: grid;align-content: center;transform: none;
+        }
+
+
+    </style>
+
+<body>
+    
+    <a href='{{ url_for("main") }}' ><img id="logo" style="position: absolute; left:49%; top:2%; height:100px" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
+
+    <div class="main">
+        {% block main %}{% endblock %}
+    </div>
+
+</body>
+</html>
