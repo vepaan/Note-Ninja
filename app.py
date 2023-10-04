@@ -86,6 +86,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         user = User.query.filter_by(email=username).first() if not user else user
 
+        app.logger.warning(User.query.all())
         if user and user.check_password(password):
             login_user(user)
             session["user_info"] = {"sub":user.id,"name":user.username,"email":user.email}
