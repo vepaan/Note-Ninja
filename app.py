@@ -5,9 +5,7 @@ from dotenv import load_dotenv
 from termcolor import cprint
 from copy import deepcopy
 from random import shuffle
-from flask_sqlalchemy import SQLAlchemy
 from models import db, User
-import sqlite3
 import secrets
 import os
 
@@ -110,8 +108,9 @@ def signup():
         email = request.form['email']
         password = request.form['password']
         cpassword = request.form['cpassword']
-
-        if password != cpassword:
+        if not all([username,email,password,cpassword]):
+            message = "Enter all values"
+        elif password != cpassword:
             message = "Passwords don't match."
         elif User.query.filter_by(username=username).first():
             message = "Username already exists. Please choose a different one."
@@ -225,6 +224,7 @@ def quiz():
             else:
                  session['user_answers'].append( (answer,"red") )
         if not session['datas']:
+            session["user_answers"] = list(reversed(session["user_answers"]))
             session.modified = True
             return redirect('/answerpage')
         data = session['datas'].pop()
@@ -249,7 +249,6 @@ def quiz():
 def answerpage():
     if 'question_bank' in session:
         session['displayed'] = True
-        session["user_answers"] = list(reversed(session["user_answers"]))
         print(list(zip(*enumerate(session['question_bank'],start=1),session['answer_bank'],session['user_answers'])))
         return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank'],session['user_answers']),stats = session['stats'],enumerate=enumerate)
     return "<h1>No data to be shown</h1>"
