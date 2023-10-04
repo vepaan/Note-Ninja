@@ -42,8 +42,8 @@
         <div class="question-box">
             <question>
                 {{ question }}
-                <img style="width: 200px;" src="../static/logo.png">
             </question>
+            <pic><img style="width: 200px;" src="../static/logo.png"></pic>
             <option-new>
                 {% for option in data %}
                 <form action="/quiz" method="POST">

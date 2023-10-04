@@ -149,6 +149,7 @@ form {
   color: white !important;
 }
 
-.question box pic img{
+.question-box pic img{
   position: relative;
+  padding: 1rem;
 }
