@@ -5,3 +5,4 @@ Flask-OAuthlib
 termcolor
 python-dotenv
 Flask-sqlalchemy
+psycopg2
