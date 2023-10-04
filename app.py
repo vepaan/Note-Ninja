@@ -17,6 +17,7 @@ app.secret_key = secrets.token_hex(16)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {"pool_pre_ping": True}
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_FILE')
 db.init_app(app)
 
@@ -86,7 +87,6 @@ def login():
         user = User.query.filter_by(username=username).first()
         user = User.query.filter_by(email=username).first() if not user else user
 
-        app.logger.warning(User.query.all())
         if user and user.check_password(password):
             login_user(user)
             session["user_info"] = {"sub":user.id,"name":user.username,"email":user.email}
@@ -155,7 +155,7 @@ def google_authorized():
     user_info = google.get('https://www.googleapis.com/oauth2/v3/userinfo').data
     session['user_info'] = user_info
     email = user_info["email"]
-    
+    app.logger.warning([i.username for i in User.query.all()])
     user = User.query.filter_by(email=email).first()
     if not user:
         new_user = User(username=user_info["name"], email=email)
@@ -252,7 +252,7 @@ def answerpage():
         session['displayed'] = True
         print(list(zip(*enumerate(session['question_bank'],start=1),session['answer_bank'],session['user_answers'])))
         return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank'],session['user_answers']),stats = session['stats'],enumerate=enumerate)
-    return "<h1>No data to be shown</h1>"
+    return render_template("no_answer.html")
 
 
 @app.route('/logout')
