@@ -93,6 +93,10 @@ def login():
             login_user(user)
             session["user_info"] = {"sub":user.id,"name":user.username,"email":user.email}
 
+            if not user.google:
+                user.google=False
+                db.session.commit()
+
             return redirect(request.referrer)
         else:
             message = "Login failed. Invalid username or password."
@@ -120,7 +124,7 @@ def signup():
         elif User.query.filter_by(email=email).first():
             message = "Email already exists. Please use a different one."
         else:
-            new_user = User(username=username, email=email)
+            new_user = User(username=username, email=email,google=False)
             new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()
@@ -141,7 +145,6 @@ def account():
 
 @app.route('/google/login')
 def google_login():
-    print(url_for('google_authorized', _external=True))
     return google.authorize(callback=url_for('google_authorized', _external=True))
 
 
@@ -160,11 +163,15 @@ def google_authorized():
     app.logger.warning([i.username for i in User.query.all()])
     user = User.query.filter_by(email=email).first()
     if not user:
-        new_user = User(username=user_info["name"], email=email)
-        new_user.set_password(secrets.token_hex(16))
-        db.session.add(new_user)    
+        user = User(username=user_info["name"], email=email,google=True)
+        user.set_password(secrets.token_hex(16))
+        db.session.add(user)    
         db.session.commit()
-    login_user(new_user)
+    if not user.google:
+        user.google=True
+        db.session.commit()
+    cprint(user.google,"red")
+    login_user(user)
 
     return redirect(request.referrer)
 
@@ -213,7 +220,6 @@ def quiz():
             with open(f"static/questions/{file}.csv","r") as f:
                 csvreader = csv.reader(f)
                 session['datas'] = list(csvreader)
-                print(session['datas'])
                 shuffle(session['datas'])
                 session['question_bank'] = deepcopy(session['datas'])
                 session['answer_bank'] = [data[1] for data in session['datas']]
@@ -248,14 +254,12 @@ def quiz():
 
     if 'data' not in session:
         return redirect("/practice")
-    print(session['data'])
     return render_template('quiz.html',data=session['data'],question=Markup(session['question']))
 
 @app.route('/answerpage')
 def answerpage():
     if 'question_bank' in session:
         session['displayed'] = True
-        print(list(zip(*enumerate(session['question_bank'],start=1),session['answer_bank'],session['user_answers'])))
         return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank'],session['user_answers']),stats = session['stats'],enumerate=enumerate)
     return render_template("no_answer.html")
 
