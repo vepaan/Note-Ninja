@@ -164,7 +164,7 @@ def google_authorized():
         new_user.set_password(secrets.token_hex(16))
         db.session.add(new_user)    
         db.session.commit()
-    login_user(user)
+    login_user(new_user)
 
     return redirect(request.referrer)
 
