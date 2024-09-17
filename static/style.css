@@ -146,8 +146,6 @@ a.active:hover::after{
 
 .logo-div {
   position: absolute;
-  left: 46%;
-  right:50%;
   top:9%;
 }
 

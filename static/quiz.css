@@ -1,5 +1,4 @@
 body {
-  overflow: scroll;
   background-image: none;
   overflow-y: scroll;
   height:auto;
@@ -60,14 +59,10 @@ html {
   z-index: 100;
 }
 
-.buttonstyler{
-  background-color:yellowgreen;
-  height: 50px;
-  width:50px;
-}
 
 .question-box{
-  position: absolute;
+  position: relative;
+  width: 85.5vw;
   background-color: rgba(51,51,51,.65);
   left:5%;
   right: 5%;
@@ -154,6 +149,7 @@ form {
   color: white !important;
 }
 
-.question box pic img{
+.question-box pic img{
   position: relative;
+  padding: 1rem;
 }

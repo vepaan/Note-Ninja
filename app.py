@@ -1,12 +1,15 @@
 from flask import Flask, render_template, request, url_for, redirect, flash, session
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from flask_oauthlib.client import OAuth
 from dotenv import load_dotenv
 from termcolor import cprint
-import secrets
-import os
 from copy import deepcopy
 from random import shuffle
+from models import db, User
+from markupsafe import Markup
+import secrets
+import csv
+import os
 
 app = Flask(__name__)
 load_dotenv()
@@ -15,6 +18,13 @@ app.secret_key = secrets.token_hex(16)
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {"pool_pre_ping": True}
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_FILE')
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 # Initialize Flask-OAuthlib
 oauth = OAuth(app)
@@ -34,19 +44,9 @@ google = oauth.remote_app(
 )
 
 
-# Example User class (you should replace this with your user management system)
-class User(UserMixin):
-    def __init__(self, id):
-        self.id = id
-
-
-# Simulated user database (replace this with your real user management system)
-users = {"user_id": User("user_id")}  # Replace "user_id" with actual user data
-
-
 @login_manager.user_loader
 def load_user(user_id):
-    return users[user_id]
+    return User.query.get(int(user_id))
 
 @app.context_processor
 def inject_data():
@@ -84,19 +84,59 @@ def notes():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user_id = 'user_id'
-        if user_id in users:
-            user = users[user_id]
-            login_user(user)
-            message = "Login successful"
-            return redirect(url_for('notes'))
-        else:
-            message = "Login failed. Invalid user ID."
+        username = request.form['uname']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(email=username).first() if not user else user
 
-        return render_template("login.html", active=None,message=message)
+        if user and user.check_password(password):
+            login_user(user)
+            session["user_info"] = {"sub":user.id,"name":user.username,"email":user.email}
+
+            if not user.google:
+                user.google=False
+                db.session.commit()
+
+            return redirect(request.referrer)
+        else:
+            message = "Login failed. Invalid username or password."
+
+        return render_template("login.html", active=None, message=message)
+
     if current_user.is_authenticated:
         return redirect(url_for("account"))
+
     return render_template("login.html", active=None)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        cpassword = request.form['cpassword']
+        if not all([username,email,password,cpassword]):
+            message = "Enter all values"
+        elif password != cpassword:
+            message = "Passwords don't match."
+        elif User.query.filter_by(username=username).first():
+            message = "Username already exists. Please choose a different one."
+        elif User.query.filter_by(email=email).first():
+            message = "Email already exists. Please use a different one."
+        else:
+            new_user = User(username=username, email=email,google=False)
+            new_user.set_password(password)
+            db.session.add(new_user)
+            db.session.commit()
+            flash("Account created successfully. You can now log in.", "success")
+            return redirect(url_for("login"))
+
+        return render_template("signup.html", active=None, message=message)
+
+    if current_user.is_authenticated:
+        return redirect(url_for("account"))
+
+    return render_template("signup.html", active=None)
 
 @app.route("/account")
 @login_required
@@ -105,7 +145,6 @@ def account():
 
 @app.route('/google/login')
 def google_login():
-    print(url_for('google_authorized', _external=True))
     return google.authorize(callback=url_for('google_authorized', _external=True))
 
 
@@ -118,19 +157,23 @@ def google_authorized():
 
     access_token= (response['access_token'], '')
     session['google_token'] = access_token
-    user_id = "user_id"
     user_info = google.get('https://www.googleapis.com/oauth2/v3/userinfo').data
     session['user_info'] = user_info
-    
+    email = user_info["email"]
+    app.logger.warning([i.username for i in User.query.all()])
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        user = User(username=user_info["name"], email=email,google=True)
+        user.set_password(secrets.token_hex(16))
+        db.session.add(user)    
+        db.session.commit()
+    if not user.google:
+        user.google=True
+        db.session.commit()
+    cprint(user.google,"red")
+    login_user(user)
 
-    # Simulated user database
-    if user_id not in users:
-        users[user_id] = User(user_id)
-
-    login_user(users[user_id])
-    # Store the Google access token in the session
-
-    return redirect(url_for('notes'))
+    return redirect(request.referrer)
 
 
 @google.tokengetter
@@ -175,18 +218,24 @@ def quiz():
             session['stats'] = {'score':0,'attempted':0}
             file = request.form.get('file')
             with open(f"static/questions/{file}.csv","r") as f:
-                session['datas'] = [line.strip().split(",") for line in f.readlines()]
+                csvreader = csv.reader(f)
+                session['datas'] = list(csvreader)
                 shuffle(session['datas'])
                 session['question_bank'] = deepcopy(session['datas'])
                 session['answer_bank'] = [data[1] for data in session['datas']]
+                session['user_answers'] = []
                     
             
         else:
             session['stats']['attempted'] +=1
-            print()
-            if session['answer'] == request.form['answer']:
+            answer = request.form['answer']
+            if session['answer'] == answer:
                 session['stats']['score'] +=1
+                session['user_answers'].append( (answer,"green") )
+            else:
+                 session['user_answers'].append( (answer,"red") )
         if not session['datas']:
+            session["user_answers"] = list(reversed(session["user_answers"]))
             session.modified = True
             return redirect('/answerpage')
         data = session['datas'].pop()
@@ -202,18 +251,17 @@ def quiz():
         for key in keys:
             session.pop(key)
         session['displayed'] = False
-        
+
     if 'data' not in session:
-        print(current_user.is_authenticated)
         return redirect("/practice")
-    return render_template('quiz.html',data=session['data'],question=session['question'])
+    return render_template('quiz.html',data=session['data'],question=Markup(session['question']))
 
 @app.route('/answerpage')
 def answerpage():
     if 'question_bank' in session:
         session['displayed'] = True
-        return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank']),stats = session['stats'])
-    return "<h1>No data to be shown</h1>"
+        return render_template("answerpage.html",data_set=zip(session['question_bank'],session['answer_bank'],session['user_answers']),stats = session['stats'],enumerate=enumerate)
+    return render_template("no_answer.html")
 
 
 @app.route('/logout')
@@ -230,8 +278,7 @@ def not_found(e):
 
 @app.errorhandler(401)
 def not_found(e):
-    print(current_user.is_authenticated)
-    return login()
+    return redirect(url_for("login"))
 
 
 if __name__ == "__main__":

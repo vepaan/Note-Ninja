@@ -13,8 +13,7 @@
      <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
       </script>
-      <script defer src="/_vercel/insights/script.js"></script>
-      {% if user_info %}
+      {% if user_info and user_info.get("picture") %}
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css')}}"></style>
       {% endif %}
       {% block head %}{% endblock %}
@@ -59,7 +58,9 @@
         <div id="icons">
             <i id="bounce" class="fa-solid fa-user fa-bounce"></i>
             <i class="fa-solid fa-user"></i>
+            {% if user_info.get("picture") %} 
             <img src='{{ user_info["picture"] }}' class="dp"></img>
+            {% endif %}
         </div>
     </a>
     {% if active=="home"%}

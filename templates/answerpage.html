@@ -1,11 +1,134 @@
-<h1>{{ stats['score'] }}</h1>
-<h1>{{ stats['attempted'] }}</h1>
-{% for datas_q,answer in data_set %}
-    {% for data in datas_q %}
-    <h1>{{ data }}</h1>
-    {% endfor %}
-    <h1>{{ answer }}</h1>
-    <script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"></style>
+     <script src="https://kit.fontawesome.com/eb018bf6f2.js" crossorigin="anonymous"></script>
+     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='notesninjalogo.png')}}" />
+    <style>
+
+        html{
+            font-size: 16px;
+        }
+
+        body {
+            overflow: scroll;
+            background-image: none;
+            overflow-y: scroll;
+            height:auto;
+            line-height: 1.2!important;
+        }
+
+        .bg {
+            top:0;
+            left: 0;
+            background: url("../static/maindesign1.png");
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            z-index: -1;
+        }
+
+        .content-main{
+            position: absolute;
+            top:.4rem;
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+            }
+
+        .title-box{
+            position: absolute;
+            padding: 0.5rem;
+            left: 49.5%;
+            top: 4.5rem;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 5rem;
+            font-family: poppins;
+            color: #BD53ED;
+            justify-content: center;
+        }
+        @media (max-width:768px){
+            .title-box{
+                font-size: 3rem;
+                top:5rem;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        #logo{
+            position: relative;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 9.375rem;
+        }
+        .main {
+            position: absolute; 
+            align-items: left;
+            top:13rem;
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 90%;
+            height: auto;
+            display: grid;
+        }
+        @media (max-width:768px){
+            .main{
+                top:11rem;
+            }
+        }
+        
+        h1{
+            color:white;
+        }
+
+        h2{
+            color: white;
+        }
+        .purple{
+            color: #BD53ED
+        }
+    </style>
+
+<body>
+    <div class="bg"></div> 
+    <a href='{{ url_for("main") }}' ><img id="logo" style="position: absolute; left:49%; top:2%; height:100px" src="{{ url_for('static', filename='noteninjatitlelogo.png')}}" alt="Logo"></a>
+    <div class="content-main">
+        <div class="title-box">Answers</div>
+        <div style="display: flex-box;" class="main">
+            <h1 style="margin: 0!important;" > <span class="purple">Score:</span> {{ stats['score'] }}</h1>
+            <h1 style="margin: 0!important;" > <span class="purple">Attempted:</span> {{ stats['attempted'] }}</h1>
+                {% for datas_q,answer,user_answer in data_set %}
+                <div style="margin-bottom: 15px; background-color: rgba(51,51,51,.65); border:1px solid white; padding: 20px;" class="box">
+                    {% for index,data in enumerate(datas_q,start=1) %}
+                        {% if index == 1 %}
+                        <h2 style="color: rebeccapurple;">{{ data }}</h2>
+                        {% else %}
+                        <h3 style="color: chocolate;">{{ data }}</h2>
+                        {% endif %}
+                    {% endfor %}
+                    <h2><span class="purple">Your Answer: </span> <span style="color: {{ user_answer[1] }}">{{ user_answer[0] }}</span></h2>
+                    <h2><span class="purple">True Answer: </span> <span style="color: green;">{{ answer }}</span></h2>
+                </div>
+                {% endfor %}
+            
+        </div>
+        <script>
             localStorage.clear();
-     </script>
-{% endfor %}
+        </script>
+        
+    </div>
+</body>
+</html>
