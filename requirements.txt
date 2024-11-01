@@ -1,4 +1,4 @@
-Flask
+Flask==2.1.0
 gunicorn
 Flask-Login
 Flask-OAuthlib
@@ -6,3 +6,4 @@ termcolor
 python-dotenv
 Flask-sqlalchemy
 psycopg2-binary
+Werkzeug==2.2.2
