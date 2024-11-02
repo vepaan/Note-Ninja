@@ -6,4 +6,4 @@ termcolor
 python-dotenv
 Flask-sqlalchemy
 psycopg2-binary
-Werkzeug==2.2.2
+Werkzeug==3.0.6
