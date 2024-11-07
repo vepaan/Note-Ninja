@@ -76,3 +76,37 @@ This project is licensed under the MIT License.
 ## Contributing
 
 Contributions are welcome! Feel free to submit issues or pull requests to enhance Notes-Ninja.
+
+## Demo
+
+Below we've added some pictures as a demo of the website.
+
+Landing page
+
+![image](https://github.com/user-attachments/assets/e63e0e28-19f2-47fb-abfe-8a3d43d2dc4f)
+
+![image](https://github.com/user-attachments/assets/0a685721-fbad-4fd1-b2bd-5bab6d42c85b)
+
+Login interface
+
+![image](https://github.com/user-attachments/assets/25f85196-24e0-46dc-8b96-342a3e7bf80f)
+
+![image](https://github.com/user-attachments/assets/5cd28396-dd7d-4e57-a3ed-cd24c1d1cc56)
+
+![image](https://github.com/user-attachments/assets/0eeea18e-e956-45fd-a8d3-be533b92fd74)
+
+Notes interface
+
+![image](https://github.com/user-attachments/assets/8faa9bea-1792-4a07-ba3c-36422aa4317b)
+
+![image](https://github.com/user-attachments/assets/08d951bd-fbb5-4061-8e72-5c7b5e327cbe)
+
+![image](https://github.com/user-attachments/assets/6ac3a90d-8c1c-4193-9005-ac243d23ff75)
+
+Quiz interface
+
+![image](https://github.com/user-attachments/assets/c0c7e5a9-8025-4e8d-96c2-8eeb8cb61111)
+
+Quiz answers interface
+
+![image](https://github.com/user-attachments/assets/ac71b8b8-9532-4342-87d8-1c7ab4b5418a)
